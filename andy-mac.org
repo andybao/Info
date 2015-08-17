@@ -1,0 +1,5 @@
+* Swithc Alt and Commend key
+(setq mac-option-modifier 'super)
+(setq mac-command-modifier 'meta)
+* Check java_home
+/usr/libexec/java_home

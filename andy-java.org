@@ -1,0 +1,29 @@
+* String
+** string -> int
+int i = Integer.parseInt(string);
+
+* for
+int[] locationCells;
+for(int cell : locationCells) {
+...
+}
+* random
+int i = (int)(Math.random() * 10);
+* ArrayList
+** Import
+import java.util.ArrayList;
+** Create
+ArrayList<int> myList = new ArrayList<int>();
+** Add
+int s = 1;
+myList.add(s);
+** Check Size
+int listSize = myList.size();
+** Check a number
+boolean isIn = myList.contains(s);
+** Check the number index
+int index = myList.indexOf(s);
+** Check the list is empty
+boolean empty = myList.isEmpty();
+** Delete a number
+myList.remove(s);
