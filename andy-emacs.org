@@ -121,10 +121,12 @@ RET
     C-u 重复执行后一个命令4次
     C-u n 重复执行后一个命令n次
     C-d 删除(delete)后一个字符
-    M-d 删除后一个单词
+    M-d 删除后一个单词 kill-word
     Del 删除前一个字符
-    M-Del 删除前一个单词
-    C-k 移除(kill)一行
+    M-Del 删除前一个单词 backward-kill-word
+    C-k 移除(kill)一行 kill-line
+    C-k Del 向前移除一行 backward-kill-line
+    M-k 移除一句 kill-sentence
       
     C-Space 设置开始标记 (例如标记区域)
     C-@ 功能同上, 用于C-Space被操作系统拦截的情况
@@ -224,6 +226,7 @@ RET
     C-c C-z 挂起程序(unix下的C-z)
     M-p 显示前一条命令
     M-n 显示后一条命令
+    M-x rename-buffer 改名后 再打开新的shell 互不干涉
       
 *   DIRectory EDitor (dired)
     C-x d 打开dired
@@ -293,14 +296,4 @@ RET
     GDB(调试器)
     M-x gdb 在另一个的窗格中打开gdb
       
-    版本控制(Version Control)
-    C-x v d 显示当前目录下所有注册过的文件(show all registered files in this dir)
-    C-x v = 比较不同版本间的差异(show diff between versions)
-    C-x v u 移除上次提交之后的更改(remove all changes since last checkin)
-    C-x v ~ 在不同窗格中显示某个版本(show certain version in different window)
-    C-x v l 打印日志(print log)
-    C-x v i 标记文件等待添加版本控制(mark file for version control add)
-    C-x v h 给文件添加版本控制文件头(insert version control header into file)
-    C-x v r 获取命名过的快照(check out named snapshot)
-    C-x v s 创建命名的快照(create named snapshot)
-    C-x v a 创建gnu风格的更改日志(create changelog file in gnu-style)
+    
