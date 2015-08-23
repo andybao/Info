@@ -57,10 +57,10 @@ Symbol's function definition is void: this
 ****** DOING 学习附带效果的具体代码
        - State "DOING"      from "TODO"       [2015-08-23 Sun 11:00]
 例一：1.9.1 使用set函数
-2. 对内部列表求值
+**** 2. 对内部列表求值
 - 内层列表先被求值，结果用于外层列表
 eg. (+ 2 (+ 3 3))
-3. 命令eval-last-sexp的含义
+**** 3. 命令eval-last-sexp的含义
 - 快捷方式：C-x C-e
 - sexp: symbol expression(符号表达式）
 - eval: evaluation(求值）
@@ -74,7 +74,9 @@ fill-column
 (fill-column)
 **** 2. 符号无值时的错误消息
 eg.
+
 (+
+
 错误消息：Symbol's value as variable is void: +
 ** 1.8 参量(argument)
 *** 1.8.1 参量的数据类型
@@ -87,7 +89,9 @@ eg. (substring "The quick brown fox jumped" 16 19)
 eg. (+ 2 fill-column)
 **** 2. 参量可以是一个列表 值是该列表的返回值
 eg. (concat "The " (+ 2 fill-column) " red foxes.")
+
 error: Wrong type argument: sequencep, 82
+
 ****** TODO (+ 2 fill-column)返回值为int concat要求string为参数 所以当前列表报错
 *** 1.8.5 message函数
 **** 1. message函数用于给用户发送消息，参量数目可以变化
@@ -96,10 +100,15 @@ error: Wrong type argument: sequencep, 82
 - (message "print a number: %d" fill-column)
 **** 2. 多个参量的例子
 (message "He saw %d %s"
+
 	 (- fill-column 34)
+
 	 (concat "red "
+
 		 (substring
+
 		  "the foxed" 4 9)
+
 		 "leaping."))
 ** 1.9 给一个变量赋值
 **** 1. 给变量赋值的方法
@@ -122,7 +131,10 @@ error: Wrong type argument: sequencep, 82
 **** 3. 赋值函数将符号指向列表
 *** 1.9.3 计数
 (setq counter 0) ; Let's call this the initializer.
+
 (setq counter (+ counter 1)) ; This is the incrementer.
+
 counter ; This is the counter
+
 ** 1.11 练习
 ****** TODO 写一个表达式 当对它求值时 它在回显区输出一条消息
