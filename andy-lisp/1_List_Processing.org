@@ -101,15 +101,10 @@ error: Wrong type argument: sequencep, 82
 **** 2. 多个参量的例子
 #+BEGIN_SRC lisp
 (message "He saw %d %s"
-
 	 (- fill-column 34)
-
 	 (concat "red "
-
 		 (substring
-
 		  "the foxed" 4 9)
-
 		 "leaping."))
 #+END_SRC
 ** 1.9 给一个变量赋值
