@@ -1,11 +1,10 @@
 * 第一章 列表处理
-1. Lisp: LISt Processing即列表处理，和通过把列表
-放置在括号之间来处理列表（甚至是列表的列表）的编程语言。
+1. Lisp: LISt Processing即列表处理，和通过把列表放置在括号之间来处理列表（甚至是列表的列表）的编程语言。
 2. 括号标记了列表的边界
 3. 一个列表用单引号或表示标记开头
 ** 1.1 Lisp列表
 1. 数据和程序都是以同样的方式表示，用空格分隔
-－ '(this is has (a list inside of it))
+- '(this is has (a list inside of it))
 *** 1.1.1 Lisp原子(atom)
 1. 在一个列表中，原子由空格分隔，可以紧接着括号
 2. 原子不可分割
@@ -64,15 +63,15 @@ eg. (+ 2 (+ 3 3))
 - 命令的含义：对距离光标最近一个符号表达式求值
 ** 1.7 变量(variable)
 1. 一个符号可以同时具有一个函数定义和一个值，各自独立
-－ 在没有括号或者在非操作符位置 返回值
-－ 有括号并在操作符位置时 返回函数操作
+- 在没有括号或者在非操作符位置 返回值
+- 有括号并在操作符位置时 返回函数操作
 eg.
 fill-column
 (fill-column)
 2. 符号无值时的错误消息
 eg.
 (+
-Symbol's value as variable is void: +
+错误消息：Symbol's value as variable is void: +
 ** 1.8 参量(argument)
 *** 1.8.1 参量的数据类型
 1. concat函数将两个或更多个字符串连接
