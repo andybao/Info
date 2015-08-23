@@ -6,6 +6,10 @@
 *   org-mode
     标题加TODO
     C-c C-t 修改当前状态
+*   Lisp
+    M-C-\ 在区域中缩排练
+    C-x C-e 执行语句，返回值出现在回显区
+    C-u C-x C-e 执行语句，返回值出现在缓冲区
 *   中文乱码解决方案
 C-x RET r 
 chinese-gbk-dos
@@ -299,6 +303,3 @@ RET
     GDB(调试器)
     M-x gdb 在另一个的窗格中打开gdb
       
-*   Lisp
-    M-C-\ 在区域中缩排练
-    C-x C-e 执行一行语句
