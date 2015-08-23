@@ -10,7 +10,7 @@
 *** 1.1.1 Lisp原子(atom)
 **** 1. 在一个列表中，原子由空格分隔，可以紧接着括号
 **** 2. 原子不可分割
-****** TODO Question: 一个列表作为另一个列表的原子 怎么理解不可分隔？
+***** TODO Todo: Question: 一个列表作为另一个列表的原子 怎么理解不可分隔？
 **** 3. 列表的三种可能的组成方式
 - 括号和括号中由空格分隔的原子
 - 括号和括号中的其他列表
@@ -54,12 +54,12 @@
 - 如果是 返回当前列表 如果不是 查看列表第一个元素 是否是一个函数定义
 - 如果是 执行函数 返回结果 如果不是 返回错误信息
 **** 2. 三种复杂情况
-****** TODO 定义晦涩 需要进一步在实践中学习‘变量’‘特殊表(special form)’
+****** TODO Todo: 定义晦涩 需要进一步在实践中学习‘变量’‘特殊表(special form)’
 **** 3. 字节编译
 - 源文件为*.el，字节编译后的文件为*.elc
 ** 1.6 求值
 **** 1. 解释器返回结果的同时可以做另外的动作，称为附带效果(side effect)
-****** DOING 学习附带效果的具体代码
+****** DOING Todo: 学习附带效果的具体代码
        - State "DOING"      from "TODO"       [2015-08-23 Sun 11:00]
 例一：1.9.1 使用set函数
 **** 2. 对内部列表求值
@@ -107,7 +107,7 @@ fill-column
 (concat "The " (+ 2 fill-column) " red foxes.")
 #+END_SRC
 - error: Wrong type argument: sequencep, 82
-****** TODO (+ 2 fill-column)返回值为int concat要求string为参数 所以当前列表报错
+****** TODO Todo: (+ 2 fill-column)返回值为int concat要求string为参数 所以当前列表报错
 *** 1.8.5 message函数
 **** 1. message函数用于给用户发送消息，参量数目可以变化
 #+BEGIN_SRC lisp
@@ -157,4 +157,4 @@ fill-column
 counter ; This is the counter
 #+END_SRC
 ** 1.11 练习
-****** TODO 写一个表达式 当对它求值时 它在回显区输出一条消息
+****** TODO Todo: 写一个表达式 当对它求值时 它在回显区输出一条消息
