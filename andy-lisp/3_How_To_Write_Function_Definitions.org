@@ -12,10 +12,10 @@
 - 函数代码
 **** 3. 宏定义模版
 #+BEGIN_SRC lisp
-(defun /function-name/ (/arguments.../)
-  "/optional-documentation.../"
-  (interactive /argument-passing-info/) ;optional
-  /body.../)
+(defun function-name (arguments...)
+  "optional-documentation..."
+  (interactive argument-passing-info) ;optional
+  body...)
 #+END_SRC
 **** 4. 宏定义示例
 - (number)为参数列表，这个例子列表中只有一个元素
@@ -41,5 +41,37 @@
 (defun multiply-by-seven (number)
   "Multiply NUMBER by seven."
   (interactive "p")
+  ;"p"表示要传送一个前缀参量给当前函数，并把这个值当做函数的参数，这个参数是一个数值
+  ;"p"是固定的符号
   (message "The result is %d" (* 7 number)))
+  ;上述message函数打印出的文本不带引号，因为它嵌在函数中，打印文本是附带效果显示
+  ;对比下列message函数打印的文本带引号，因为当前文本是函数返回的值
 #+END_SRC
+** 3.4 interactive函数的不同选项
+- 3.3.4示例中的'p'是interactive的参数，表示输入一个数字
+**** 1. Emacs有多于20个为interactive定义好的字符，可以设置一个或多个输入格式作为参数
+- 参考<Gun Emacs Lisp技术手册>中"interactive的控制符"
+**** 2. 参数示例
+- 'r' 位点所在区域的开始值和结束值
+- 'B' 缓冲区名字
+**** 3. 多个参数
+- 参数符号间用'\n'隔开，与函数参数列表对应，依次输入
+- append-to-buffer函数和下列示例相像，参考4.4节"append-to-buffer函数的定义".
+#+BEGIN_SRC lisp
+(defun name-of-function (buffer start end)
+  "documentation..."
+  (interactive "BAppend to buffer: \nr")
+  body-of-function...)
+#+END_SRC
+**** 4. 没有参数
+- 直接放置表达式(interactive)，mark-whole-buffer函数就是这种情况
+**** 5. 使用自定义的参数符号
+- 参考<Gun Emacs Lisp技术手册>中"使用interactive"
+** 3.5 永久的安装代码
+**** 1. 在对一个函数求值来安装它的时候，生命周期会保持到Emacs退出
+**** 2. Emacs启动时，自动安装函数的几种方法
+- 将代码放在'.emacs'文件中（参考16章"配置你的'.emacs'文件")
+- 将函数定义放在一个或者多个文件中，使用load函数求值（参考16.8节"加载文件")
+- 将函数放在'site-init.el'文件中
+** 3.6 let函数
+
