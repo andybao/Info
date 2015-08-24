@@ -2,7 +2,7 @@
 **** 1. 有函数定义的符号称为函数
 - 基本函数由C语言编写
 ** 3.1 定义宏(macro)的关键字defun 
-**** 1. 以defun开头的lisp表达式称为宏
+**** 1. 以defun为首原子的lisp表达式称为宏
 - 宏对一个符号进行函数定义
 **** 2. 由defun定义的函数最多有五个部分
 - 符号名，函数定义所依附的符号
@@ -13,14 +13,25 @@
 **** 3. 宏定义模版
 #+BEGIN_SRC lisp
 (defun /function-name/ (/arguments.../)
-"/optional-documentation.../"
-(interactive /argument-passing-info/) ;optional
-/body.../)
+  "/optional-documentation.../"
+  (interactive /argument-passing-info/) ;optional
+  /body.../)
 #+END_SRC
 **** 4. 宏定义示例
-
+- (number)为参数列表，这个例子列表中只有一个元素
+- 参数列表中的参数名是私有的
+- "Mul..."为文档字符串，第一行是一个完整句子，如果有第二行，不要缩进
+- C-h f (describe-function)用于查看文档字符串
 #+BEGIN_SRC lisp
 (defun multiply-by-seven (number)
-"Multiply NUMBER by seven."
-(* 7 number))
+  "Multiply NUMBER by seven."
+  (* 7 number))
+-> multiply-by-seven
+(multiply-by-seven 3) -> 21 ;宏的使用示例
 #+END_SRC
+** 3.2 安装宏
+**** 1. 对宏求值，返回符号名，即可使用直到当前Emacs退出
+**** 2. 关于Emacs启动时自动加载代码，参考3.5节“永久安装代码”
+** 3.3 使函数称为交互函数
+**** 1. 在函数文档后增加
+
