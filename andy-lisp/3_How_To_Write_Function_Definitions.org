@@ -46,6 +46,7 @@
   (message "The result is %d" (* 7 number)))
   ;上述message函数打印出的文本不带引号，因为它嵌在函数中，打印文本是附带效果显示
   ;对比下列message函数打印的文本带引号，因为当前文本是函数返回的值
+  (message "The result is 21")
 #+END_SRC
 ** 3.4 interactive函数的不同选项
 - 3.3.4示例中的'p'是interactive的参数，表示输入一个数字
@@ -74,4 +75,31 @@
 - 将函数定义放在一个或者多个文件中，使用load函数求值（参考16.8节"加载文件")
 - 将函数放在'site-init.el'文件中
 ** 3.6 let函数
-
+**** 1. let用于将一个符号绑定到一个值上，该局部变量只在当前表达式中有效
+*** 3.6.1 let表达式模版
+#+BEGIN_SRC lisp
+(let ((variable value)
+      (variable value)
+      ...)
+      body...)
+#+END_SRC
+*** 3.6.2 let表达式示例
+#+BEGIN_SRC lisp
+(let ((zebra 'stripes)
+      (tiger 'fierce))
+  (message "One kind of animal has %s and another is %s."
+	   zebra tiger))
+-> "One kind of animal has stripes and another is fierce."
+#+END_SRC
+*** 3.6.3 let语句中未初始化的变量
+**** 1. 未初始化的符号将被赋予nil
+#+BEGIN_SRC lisp
+(let ((birch 3) ;数字本身就是值，所以不用加引号
+      (pine)
+      (fir)
+      (oak 'some))
+  (message
+   "Here are %d variables with %s, %s, and %s value."
+   birch pine fir oak))
+-> "Here are 3 variables with nil, nil, and some value."
+#+END_SRC
