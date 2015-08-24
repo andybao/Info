@@ -1,0 +1,26 @@
+* 第三章 如何编写函数定义 (How To Write Function Definitions)
+**** 1. 有函数定义的符号称为函数
+- 基本函数由C语言编写
+** 3.1 定义宏(macro)的关键字defun 
+**** 1. 以defun开头的lisp表达式称为宏
+- 宏对一个符号进行函数定义
+**** 2. 由defun定义的函数最多有五个部分
+- 符号名，函数定义所依附的符号
+- 参数列表，如果没有参数，放置一个空列表
+- 描述文档（可选）
+- 表达式（可选），用于通过M-x和该表达式调用宏，或者设置快捷键同理
+- 函数代码
+**** 3. 宏定义模版
+#+BEGIN_SRC lisp
+(defun /function-name/ (/arguments.../)
+"/optional-documentation.../"
+(interactive /argument-passing-info/) ;optional
+/body.../)
+#+END_SRC
+**** 4. 宏定义示例
+
+#+BEGIN_SRC lisp
+(defun multiply-by-seven (number)
+"Multiply NUMBER by seven."
+(* 7 number))
+#+END_SRC
