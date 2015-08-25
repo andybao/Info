@@ -1,0 +1,34 @@
+** Superclass constructors with arguments
+#+BEGIN_SRC java
+abstract class Animal {
+
+    private String name;
+
+    public String getName() {
+
+	return name;
+    }//method getName end
+
+    public Animal(String  theName) {
+
+	name = theName;
+    }//method Animal end
+}//class Animal end
+
+class Hippo extends Animal {
+
+    public Hippo(String name) {
+
+	super(name);
+    }//method Hippo end
+}//class Hippo end
+
+public class MakeHippo {
+
+    public static void main(String[] args) {
+
+	Hippo h = new Hippo("Buffy");
+	System.out.println(h.getName());
+    }//method main end
+}//class MakeHippo end
+#+END_SRC
