@@ -21,7 +21,7 @@
 **** 6. 列表中双引号中的文本被认为是一个原子
 - 这种原子被成为string
 #+BEGIN_SRC lisp
-'(this list includes "text betwwon quotation marks.")
+'(this list includes "text between quotation marks.")
 #+END_SRC
 ** 1.2 运行一个程序
 **** 1. 任何列表都是一个准备运行的程序
