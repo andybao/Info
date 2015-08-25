@@ -103,3 +103,50 @@
    birch pine fir oak))
 -> "Here are 3 variables with nil, nil, and some value."
 #+END_SRC
+** 3.7 if特殊表
+**** 1. if的格式
+#+BEGIN_SRC lisp
+(if true-or-false-test
+    action-to-carry-out-if-test-is-true)
+#+END_SRC
+**** 2. if的示例_1
+#+BEGIN_SRC lisp
+(if (> 5 4)
+    (message "5 is greater than 4"))
+-> "5 is greater than 4"
+#+END_SRC
+**** 3. if的示例_2
+#+BEGIN_SRC lisp
+(defun type-of-animal (char)
+  "Print message in echo area depending on char"
+  (if (equal char 'fierce)
+      (message "Is's a tiger")))
+-> type-of-animal
+(type-of-animal 'fierce) -> "Is's a tiger"
+(type-of-animal 'zebra) -> nil
+#+END_SRC
+** 3.8 if-then-else
+**** 1. 格式
+#+BEGIN_SRC lisp
+(if true-or-false-test
+    action-to-carry-out-if-test-is-true)
+  action-to-carry-out-if-test-is-flase)
+#+END_SRC
+**** 2. 示例
+#+BEGIN_SRC lisp
+(defun type-of-animal (char)
+  "Print message in echo area depending on char"
+  (if (equal char 'fierce)
+      (message "Is's a tiger")
+    (message "It's not fierce")))
+(type-of-animal 'fierce) -> "Is's a tiger"
+(type-of-animal 'zebra) ->  "It's not fierce"
+#+END_SRC
+** 3.9 lisp中的真与假
+**** 1. nil与()为假，其余全部为真
+** 3.10 save-excursion函数
+**** 1. save-excursion保存位点和标记的当前位置
+- 位点(point)是光标所在位置前一个字符
+- 标记(mark)通过命令设置 C-@
+- 位点和标记之间的缓冲区称为域(region)
+****** TODO 过于晦涩 看不懂 复习时再看
