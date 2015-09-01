@@ -147,7 +147,7 @@ andybao  console  Sep  1 07:18
 ** 2.7 简单的执行跟踪
 - set -x 打开执行跟踪
 - set +x 关闭执行跟踪
-- Shell会显示每个被执行的命令，并在前面显示一个加号(+)
+- Shell会显示每个被执行的命令，并在前面显示一个加号+
 ***** 命令行中执行跟踪
 #+BEGIN_SRC shell
 sh -x nusers #打开执行跟踪
@@ -173,3 +173,11 @@ $ ./trace1.sh
 + set +x        #关闭执行跟踪的命令也会被跟踪
 2nd echo        #第二个命令没有被跟踪，直接得到输出
 #+END_SRC
+* 第三章 查找和替换
+** 3.1 查找文本
+*** 3.1.1 简单的grep
+- grep默认是-F模式，即查找固定字符串
+#+BEGIN_SRC shell
+who | grep andybao
+#+END_SRC
+** 3.2 正则表达式
