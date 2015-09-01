@@ -124,8 +124,52 @@ stty echo                     #打开自动打印输入字符的功能
 ** 2.6 访问Shell脚本的参数
 - 位置参数是Shell脚本的命令行参数，也可以是Shell函数中的函数参数
 - 各参数都以整数命名，超过9时，需要放在花括号中
-*** 命令行中查找指定用户
+***** 命令行中查找指定用户
 #+BEGIN_SRC shell
 $ who | grep andybao
 andybao  console  Sep  1 07:18 
+#+END_SRC
+***** 脚本中查找指定用户
+- 脚本运行是第一个参数即查找目标
+#+BEGIN_SRC shell
+#脚本
+#! /bin/sh
+# finduser --- 查看第一个参数所指定的用户是否登陆
+who | grep $1
+C-d
+#+END_SRC
+#+BEGIN_SRC shell
+#脚本运行
+$ chmod +x finduser #设置执行权限
+$ ./finduser andybao  #输入参数 运行脚本
+andybao  console  Sep  1 07:18 
+#+END_SRC
+** 2.7 简单的执行跟踪
+- set -x 打开执行跟踪
+- set +x 关闭执行跟踪
+- Shell会显示每个被执行的命令，并在前面显示一个加号(+)
+***** 命令行中执行跟踪
+#+BEGIN_SRC shell
+sh -x nusers #打开执行跟踪
++ who        #被跟踪的命令
++ wc -l
+       1     #输出 
+#+END_SRC
+***** 脚本中执行跟踪
+#+BEGIN_SRC shell
+#脚本
+#! /bin/sh
+
+set -x        #打开执行跟踪
+echo 1st echo #逻辑代码
+set +x        #关闭执行跟踪
+echo 2nd echo #逻辑代码
+#+END_SRC
+#+BEGIN_SRC shell
+$ chomd +x trace1.sh
+$ ./trace1.sh
++ echo 1st echo #被跟踪的第一个命令
+1st echo        #第一个命令的输出
++ set +x        #关闭执行跟踪的命令也会被跟踪
+2nd echo        #第二个命令没有被跟踪，直接得到输出
 #+END_SRC
