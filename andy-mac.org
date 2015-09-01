@@ -5,3 +5,5 @@
 /usr/libexec/java_home
 * brew
 http://brew.sh/
+* Windows smb
+
