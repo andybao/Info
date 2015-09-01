@@ -14,7 +14,7 @@
 - |符号在两个程序中建立连接：who的输出作为wc的输入
 #+BEGIN_SRC shell
 $ who | wc -l
--> 2
+2
 #+END_SRC
 **** 文件中
 - cat 在当前目录下创建文件
@@ -25,5 +25,5 @@ who | wc -l        #程序
 C-d                #C-d表示end-of-file
 $ chmod +x nusers  #让文件有执行权限
 $ ./nusers         #执行测试
--> 2               #输出结果
+2                  #输出结果
 #+END_SRC
