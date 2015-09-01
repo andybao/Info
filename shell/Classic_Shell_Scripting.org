@@ -119,3 +119,13 @@ read pw2 < /dev/tty           #再读取一次以确认
 stty echo                     #打开自动打印输入字符的功能
 ...
 #+END_SRC
+*** 2.5.6 基本命令查找
+- Shell会沿着查找路径$PATH来寻找命令
+** 2.6 访问Shell脚本的参数
+- 位置参数是Shell脚本的命令行参数，也可以是Shell函数中的函数参数
+- 各参数都以整数命名，超过9时，需要放在花括号中
+*** 命令行中查找指定用户
+#+BEGIN_SRC shell
+$ who | grep andybao
+andybao  console  Sep  1 07:18 
+#+END_SRC
