@@ -7,8 +7,8 @@
 - 缺点：运行于底层，很难执行‘复制文件’的操作
 *** 2.1.2 编译型语言
 - 脚本编程语言通常是解释型的，由解释器读入代码，并转换为内部形式执行
-*** 2.3 一个简单的脚本
-**** 命令行格式下
+** 2.3 一个简单的脚本
+*** 2.3.1 命令行执行
 - who 当前系统有谁登陆
 - wc 字数计算程序（参数l表示计算行数）
 - |符号在两个程序中建立连接：who的输出作为wc的输入
@@ -16,7 +16,7 @@
 $ who | wc -l
 2
 #+END_SRC
-**** 文件中
+*** 2.3.2 文件执行
 - cat 在当前目录下创建文件
 - chmod 设置文件权限
 #+BEGIN_SRC shell
@@ -27,3 +27,72 @@ $ chmod +x nusers  #让文件有执行权限
 $ ./nusers         #执行测试
 2                  #输出结果
 #+END_SRC
+** 2.4 位于第一行的#!
+- 告知UNIX内核使用哪个shell来执行脚本
+- 通常情况如下
+#+BEGIN_SRC shell
+#! /bin/sh
+#+END_SRC
+** 2.5 Shell的基本元素
+*** 2.5.1 命令与参数
+- Shell识别三种基本命令：内建命令，Shell函数和外部命令（子shell)
+- 空白隔开命令行的各个组成部分
+- 命令名称是第一个项目，后跟选项和参数
+- 选项的开头是一个或两个减号(-)
+- 分号(;)分隔同一行中的多条命令，顺序执行，前一个完成后，第二个执行
+- &符号也可以分隔多条命令，前面的命令会在后台执行，前后两个命令会同时执行
+#+BEGIN_SRC shell
+$ cd ~/Info/shell/ ; ls -l Classic_Shell_Scripting.org
+-rw-r--r--  1 andybao  staff  1710 Sep  1 13:17 Classic_Shell_Scripting.org
+#+END_SRC
+*** 2.5.2 变量
+- 以字母或下划线开头，可以接任意长度的字母、数字或下划线符号
+- 赋新值：变量名称＝新值
+- 使用变量的值时，变量前加$
+- 当值中含有空格，需要加引号
+- 将几个变量连接起来时，需要加引号
+- 单行可以多次赋值
+#+BEGIN_SRC shell
+$ myvar=a_long_string #分配变量值
+$ echo $myvar         #打印变量值
+a_long_string
+#+END_SRC
+#+BEGIN_SRC shell
+$ first=ab middle=cd last=ef      #单行多次赋值
+$ full_1="ab cd ef"               #值中包含空格
+$ full_2="$first $middle $last"   #连接变量
+$ echo $full_1
+ab cd ef
+$ echo $full_2
+ab cd ef
+#+END_SRC
+*** 2.5.5 基本的I/O重定向
+- 标准输入／输出：程序应该有来源端，目的端以及报告问题
+- 默认的标准输入，标准输出以及标准错误输出都是终端
+**** 2.5.5.1 重定向与管道
+***** 以左尖括号(<)改变标准输入
+#+BEGIN_SRC shell
+tr -d '\r' < dos-file.txt #dos-file.txt作为命令tr的输入
+#+END_SRC
+***** 以右尖括号(>)改变标准输出
+- 当目标文件不存在时，会新建一个
+- 当目标文件存在时，会被覆盖，原有数据丢失
+#+BEGIN_SRC shell
+tr -d '\r' < dos-file.txt > UNIX-file.txt
+#+END_SRC
+***** 以>>附加到文件
+- 当目标文件不存在时，会新建一个
+- 当目标文件存在时，不覆盖，在文件结尾处追加数据
+#+BEGIN_SRC shell
+for f in dos-file*.txt
+do
+    tr -d '\r' < $f >> big-UNIX-file.txt
+done
+#+END_SRC
+***** 以|建立管道
+- 管道将两个运行中的程序衔接
+- 第一个程序的标准输出成为第二个程序的标准输入
+#+BEGIN_SRC shell
+tr -d '\r' <dos-file.txt | sort > UNIX-file.txt
+#+END_SRC
+
