@@ -1,26 +1,47 @@
 * 国内准备
 ** 行李
 *** TODO 托运行李箱 x2 - 扎带和贴画
+*** TODO 从张家拿被子，真空压缩袋
+*** TODO 整理要带的书
 ** 现金
-*** TODO 3000加拿大元
+*** DOING 3000加拿大元
+    - State "DOING"      from "TODO"       [2015-09-01 Tue 07:54]
 ** 机票
-去程：
-AC032 
+*** 去程：
+**** 北京－多伦多 AC032 
 9.30 18:05 北京 T3
 9.30 18.50 多伦多 T1
-AC450
+**** 多伦多－渥太华 AC450
 10.3 12:10 多伦多 T1
 10.3 13:13 渥太华
-返程
-AC449
+*** 返程
+**** 渥太华－多伦多 AC449
 10.8 11:00 渥太华
-10.8 12:07 多论坛 T1
-AC031
+10.8 12:07 多伦多 T1
+**** 多伦多－北京 AC031
 10.8 14:50 多伦多 T3
 10.9 16:05 北京 T3
+** TODO 渥太华往返蒙特利尔车票
+** TODO 大瀑布行程
 ** 护照和landing paper
 *** TODO 复印landing paper两份
-
+** 住宿
+*** 9.30 - 10.3
+皇家橡树旅馆 (Royal Oak Inn)
+376 Dundas Street East, Toronto (Ontario)
++14167924921
+*** 10.3 - 10.6
+戴斯渥太华酒店 (Days Inn - Ottawa)
+319 Rideau Street, Ottawa (Ontario)
++16137895555
+*** 10.6 - 10.7
+艺术酒店 (Hotel des Arts)
+2060 rue Saint-Dominique, Montréal (Québec)
++15148432483
+*** 10.7 - 10.8
+商务酒店 (The Business Inn)
+180 Maclaren Street, Ottawa (Ontario)
++16132321121
 
 * 加拿大代办事项
 ** 枫叶卡
