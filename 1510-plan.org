@@ -29,25 +29,33 @@
 ** TODO 4. Todo 渥太华往返蒙特利尔车票
 ** TODO 5. Todo 大瀑布行程
 ** 6. 护照和landing paper
-*** TODO - 复印landing paper两份
+*** TODO 复印landing paper两份
 ** 7. 住宿
 *** 7.1 9.30 - 10.3
 皇家橡树旅馆 (Royal Oak Inn)
+
 376 Dundas Street East, Toronto (Ontario)
+
 +14167924921
 *** 7.2 10.3 - 10.6
 戴斯渥太华酒店 (Days Inn - Ottawa)
+
 319 Rideau Street, Ottawa (Ontario)
+
 +16137895555
 *** 7.3 10.6 - 10.7
 艺术酒店 (Hotel des Arts)
+
 2060 rue Saint-Dominique, Montréal (Québec)
+
 +15148432483
 *** 7.4 10.7 - 10.8
 商务酒店 (The Business Inn)
-180 Maclaren Street, Ottawa (Ontario)
-+16132321121
 
+180 Maclaren Street, Ottawa (Ontario)
+
++16132321121
+** TODO 8. Todo 旅馆至各处通勤方式
 * 加拿大代办事项
 ** 枫叶卡
 ** sin号码
