@@ -140,7 +140,7 @@ C-d
 #+END_SRC
 #+BEGIN_SRC shell
 #脚本运行
-$ chmod +x finduser #设置执行权限
+$ chmod +x finduser   #设置执行权限
 $ ./finduser andybao  #输入参数 运行脚本
 andybao  console  Sep  1 07:18 
 #+END_SRC
