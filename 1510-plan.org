@@ -65,6 +65,8 @@
 
 * 2 加拿大代办事项
 ** 2.1 枫叶卡
+－ 邮寄地址
+#2110 - 29 SINGER CRT. NORTH YORK，ON，M2K0B3，CANADA
 ** 2.2 sin号码
 ** TODO 2.3 Todo 查看办理注意事项
 * TODO 3 Todo Daily detail
