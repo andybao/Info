@@ -1,0 +1,152 @@
+* 第三章 如何编写函数定义 (How To Write Function Definitions)
+**** 1. 有函数定义的符号称为函数
+- 基本函数由C语言编写
+** 3.1 定义宏(macro)的关键字defun 
+**** 1. 以defun为首原子的lisp表达式称为宏
+- 宏对一个符号进行函数定义
+**** 2. 由defun定义的函数最多有五个部分
+- 符号名，函数定义所依附的符号
+- 参数列表，如果没有参数，放置一个空列表
+- 描述文档（可选）
+- 表达式（可选），用于通过M-x和该表达式调用宏，或者设置快捷键同理
+- 函数代码
+**** 3. 宏定义模版
+#+BEGIN_SRC lisp
+(defun function-name (arguments...)
+  "optional-documentation..."
+  (interactive argument-passing-info) ;optional
+  body...)
+#+END_SRC
+**** 4. 宏定义示例
+- (number)为参数列表，这个例子列表中只有一个元素
+- 参数列表中的参数名是私有的
+- "Mul..."为文档字符串，第一行是一个完整句子，如果有第二行，不要缩进
+- C-h f (describe-function)用于查看文档字符串
+#+BEGIN_SRC lisp
+(defun multiply-by-seven (number)
+  "Multiply NUMBER by seven."
+  (* 7 number))
+-> multiply-by-seven
+(multiply-by-seven 3) -> 21 ;宏的使用示例
+#+END_SRC
+** 3.2 安装宏
+**** 1. 对宏求值，返回符号名，即可使用直到当前Emacs退出
+**** 2. 关于Emacs启动时自动加载代码，参考3.5节“永久安装代码”
+** 3.3 使函数改变为交互函数
+**** 1. 在函数文档后增加以interactive为首原子的列表可以使函数变为交互函数
+**** 2. 交互函数可以使用M-x (function name)或绑定键序列来调用，称为用交互的方法调用函数
+**** 3. 用交互的方式调用函数，函数的返回值不回自动显示在回显区
+**** 4. 安装以下函数定义，即求值(C-x C-e)，然后C-x /number/ M-x multiply-by-seven运行
+#+BEGIN_SRC lisp
+(defun multiply-by-seven (number)
+  "Multiply NUMBER by seven."
+  (interactive "p")
+  ;"p"表示要传送一个前缀参量给当前函数，并把这个值当做函数的参数，这个参数是一个数值
+  ;"p"是固定的符号
+  (message "The result is %d" (* 7 number)))
+  ;上述message函数打印出的文本不带引号，因为它嵌在函数中，打印文本是附带效果显示
+  ;对比下列message函数打印的文本带引号，因为当前文本是函数返回的值
+  (message "The result is 21")
+#+END_SRC
+** 3.4 interactive函数的不同选项
+- 3.3.4示例中的'p'是interactive的参数，表示输入一个数字
+**** 1. Emacs有多于20个为interactive定义好的字符，可以设置一个或多个输入格式作为参数
+- 参考<Gun Emacs Lisp技术手册>中"interactive的控制符"
+**** 2. 参数示例
+- 'r' 位点所在区域的开始值和结束值
+- 'B' 缓冲区名字
+**** 3. 多个参数
+- 参数符号间用'\n'隔开，与函数参数列表对应，依次输入
+- append-to-buffer函数和下列示例相像，参考4.4节"append-to-buffer函数的定义".
+#+BEGIN_SRC lisp
+(defun name-of-function (buffer start end)
+  "documentation..."
+  (interactive "BAppend to buffer: \nr")
+  body-of-function...)
+#+END_SRC
+**** 4. 没有参数
+- 直接放置表达式(interactive)，mark-whole-buffer函数就是这种情况
+**** 5. 使用自定义的参数符号
+- 参考<Gun Emacs Lisp技术手册>中"使用interactive"
+** 3.5 永久的安装代码
+**** 1. 在对一个函数求值来安装它的时候，生命周期会保持到Emacs退出
+**** 2. Emacs启动时，自动安装函数的几种方法
+- 将代码放在'.emacs'文件中（参考16章"配置你的'.emacs'文件")
+- 将函数定义放在一个或者多个文件中，使用load函数求值（参考16.8节"加载文件")
+- 将函数放在'site-init.el'文件中
+** 3.6 let函数
+**** 1. let用于将一个符号绑定到一个值上，该局部变量只在当前表达式中有效
+*** 3.6.1 let表达式模版
+#+BEGIN_SRC lisp
+(let ((variable value)
+      (variable value)
+      ...)
+      body...)
+#+END_SRC
+*** 3.6.2 let表达式示例
+#+BEGIN_SRC lisp
+(let ((zebra 'stripes)
+      (tiger 'fierce))
+  (message "One kind of animal has %s and another is %s."
+	   zebra tiger))
+-> "One kind of animal has stripes and another is fierce."
+#+END_SRC
+*** 3.6.3 let语句中未初始化的变量
+**** 1. 未初始化的符号将被赋予nil
+#+BEGIN_SRC lisp
+(let ((birch 3) ;数字本身就是值，所以不用加引号
+      (pine)
+      (fir)
+      (oak 'some))
+  (message
+   "Here are %d variables with %s, %s, and %s value."
+   birch pine fir oak))
+-> "Here are 3 variables with nil, nil, and some value."
+#+END_SRC
+** 3.7 if特殊表
+**** 1. if的格式
+#+BEGIN_SRC lisp
+(if true-or-false-test
+    action-to-carry-out-if-test-is-true)
+#+END_SRC
+**** 2. if的示例_1
+#+BEGIN_SRC lisp
+(if (> 5 4)
+    (message "5 is greater than 4"))
+-> "5 is greater than 4"
+#+END_SRC
+**** 3. if的示例_2
+#+BEGIN_SRC lisp
+(defun type-of-animal (char)
+  "Print message in echo area depending on char"
+  (if (equal char 'fierce)
+      (message "Is's a tiger")))
+-> type-of-animal
+(type-of-animal 'fierce) -> "Is's a tiger"
+(type-of-animal 'zebra) -> nil
+#+END_SRC
+** 3.8 if-then-else
+**** 1. 格式
+#+BEGIN_SRC lisp
+(if true-or-false-test
+    action-to-carry-out-if-test-is-true)
+  action-to-carry-out-if-test-is-flase)
+#+END_SRC
+**** 2. 示例
+#+BEGIN_SRC lisp
+(defun type-of-animal (char)
+  "Print message in echo area depending on char"
+  (if (equal char 'fierce)
+      (message "Is's a tiger")
+    (message "It's not fierce")))
+(type-of-animal 'fierce) -> "Is's a tiger"
+(type-of-animal 'zebra) ->  "It's not fierce"
+#+END_SRC
+** 3.9 lisp中的真与假
+**** 1. nil与()为假，其余全部为真
+** 3.10 save-excursion函数
+**** 1. save-excursion保存位点和标记的当前位置
+- 位点(point)是光标所在位置前一个字符
+- 标记(mark)通过命令设置 C-@
+- 位点和标记之间的缓冲区称为域(region)
+****** TODO 过于晦涩 看不懂 复习时再看
