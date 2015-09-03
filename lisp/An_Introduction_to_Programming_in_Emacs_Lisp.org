@@ -248,7 +248,7 @@ counter ; This is the counter
 **** 1. 在函数文档后增加以interactive为首原子的列表可以使函数变为交互函数
 **** 2. 交互函数可以使用M-x (function name)或绑定键序列来调用，称为用交互的方法调用函数
 **** 3. 用交互的方式调用函数，函数的返回值不回自动显示在回显区
-**** 4. 安装以下函数定义，即求值(C-x C-e)，然后C-x /number/ M-x multiply-by-seven运行
+**** 4. 安装以下函数定义，即求值(C-x C-e)，然后C-u /number/ M-x multiply-by-seven运行
 #+BEGIN_SRC lisp
 (defun multiply-by-seven (number)
   "Multiply NUMBER by seven."
@@ -362,3 +362,18 @@ counter ; This is the counter
 - 标记(mark)通过命令设置 C-@
 - 位点和标记之间的缓冲区称为域(region)
 ****** TODO 过于晦涩 看不懂 复习时再看
+** 3.12 练习
+*** 1. 编写一个非交互函数，将其第一个参量（数字）的值翻倍。然后使这个函数成为交互函数。
+#+BEGIN_SRC lisp
+(defun 1-12-3 (number)
+    (interactive "p")
+    (message "The result is %d" (* number 2)))
+#+END_SRC
+*** 2. 编写一个函数，测试fill-column的当前值是否大于传送给函数的值，打印适当消息。
+#+BEGIN_SRC lisp
+(defun 2-12-3 (number)
+    (if (> fill-column number)
+        (message "fill-column is big")
+      (message "fill-column is small")))
+#+END_SRC
+
