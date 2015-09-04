@@ -1,0 +1,73 @@
+* 第五章 更复杂的函数 (A Few More Complex Functions)
+** 5.1 copy-to-buffer函数的定义
+#+BEGIN_SRC lisp
+...
+(interactive "BCopy to buffer: \nr")
+  (let ((oldbuf (current-buffer)))
+    (save-excursion
+      (set-buffer (get-buffer-create buffer))
+      (erase-buffer)
+      (save-excursion ;使得第二个buffer的光标在起始位置
+        (insert-buffer-substiong oldbuf start end)))))
+#+END_SRC
+** 5.2 insert-buffer函数的定义
+- insert-buffer函数将另一个缓冲区的内容拷贝到当前缓冲区
+#+BEGIN_SRC lisp
+(defun test-insert-buffer (buffer)
+"Insert after point the contents of BUFFER.
+puts mark after the inserted text.
+BUFFER may be a buffer or a buffer name."
+(interactive "*bInsert buffer: ")
+(or (bufferp buffer)
+    (setq buffer (get-buffer buffer)))
+(let (start end newmark)
+  (save-excursion
+    (save-excursion
+      (set-buffer buffer)
+      (setq start (point-min) end (point-max)))
+    (insert-buffer-substring buffer start end)
+    (setq newmark (point)))
+(push-mark newmark)))
+#+END_SRC
+*** 5.2.1 insert-buffer函数中的交互表达式
+**** 只读缓冲区
+- '*'如果被调用的缓冲区是只读的，会打印警告信息
+- 如果不加'*'，会执行insert-buffer函数，在进行写操作时才打印警告信息
+**** 'b'和'B'
+- 'b'传送给insert-buffer函数的参量必须时一个存在的缓冲区，否则报错
+- 'B'可以传送给函数一个不存在的缓冲区
+*** 5.2.2 insert-buffer函数体
+- 'or'表达式确保buffer参量与一个缓冲区绑定在一起，而不是缓冲区的名字
+- 'let'表达式将另一个缓冲区的内容拷贝到当前缓冲区
+*** 5.2.3 用if表达式编写的insert-buffer函数
+- 'bufferp'函数判定参量是否时缓冲区，如果是返回真，否则返回假
+- 'bufferp'最后的字母'p'表示当前是一个判定函数，参考1.8.4节
+#+BEGIN_SRC lisp
+(if (not (bufferp buffer))
+    (setq buffer (get-buffer buffer)))
+#+END_SRC
+*** 5.2.4 'or'表达式
+- 'or'函数可以有很多参量，对逐个对每一个参量求值并返回第一个不是nil的参量
+- 当遇到第一个不是nil的参量后，'or'函数不再对后续参量和表达式求值
+- 如果(bufferp buffer)返回值为真，不再执行(setq...)
+#+BEGIN_SRC lisp
+(or (bufferp buffer)
+    (setq buffer (get-buffer buffer)))
+#+END_SRC
+*** 5.2.5 'let'表达式
+**** 内层的save-excursion表达式
+#+BEGIN_SRC lisp
+(save-excursion ;在执行完函数体后，退回到上一个buffer
+  (set-buffer buffer) ;改变焦点到用户传入的buffer
+  (setq start (poing-min) end (point-max))) ;根据参数buffer设置数据
+#+END_SRC
+**** 外层的save-excursion表达式
+#+BEGIN_SRC lisp
+(save-excursion
+  (inner-save-excursion-expression
+    (go-to-new-buffer-and-set-start-and-end))
+  (insert-buffer-substring buffer start end)
+  (setq newmark (point))) ;记录插入文本末尾的位点
+#+END_SRC
+**** (push-mark newmark)
+****** TODO 对应标记的概念不清楚
