@@ -33,9 +33,27 @@ leave mark at previous position."
   "Append to specified buffer the text of the region.
   It is inserted into that buffer before its point."
   (interactive "BAppend to buffer: \nr")
-  (let ((oldbuf (current-buffer)))
+  (let ((oldbuf (current-buffer))) ;oldbuf前的两个括号参考3.6.1
     (save-excursion
-      (set-buffer (get-buffer-create buffer))
+      (set-buffer (get-buffer-create buffer)) ;set-buffer参考2.3.2
       (insert-buffer-substring oldbuf start end))))
 #+END_SRC
 *** 4.4.1 append-to-buffer函数的交互表达式
+#+BEGIN_SRC lisp
+(interactive "BAppend to buffer: \nr")
+#+END_SRC
+- 表达式有一个位于双引号中的参量，包含两部分，用"\n"分隔
+- 第一部分"BAppend to buffer:", "B"控制符要求输入缓冲区名并传给函数
+- "r"表示第二和第三个参数（start和end）绑定到位点和标记的值上
+*** 4.4.3 append-to-buffer函数中的save-excursion表达式
+- save-excursion函数保存位点和标记的位置，当函数体中的其他表达式都被求值知乎恢复位点和标记到相应位置
+**** (set-buffer (get-buffer-create buffer))
+- 'buffer'的值来自interactive函数的参数B
+- 'get-buffer-create'函数接受传入的参数，如果是缓冲区名，则获得该缓冲区，如果不是，创建同名缓冲区
+- 'set-buffer'函数把焦点转移到参数缓冲区
+**** (insert-buffer-substring oldbuf start end)
+- 'oldbuf'的值从let函数得到
+- 'start'/'end'的值由interactive函数的参数r得到
+- 'insert-buffer-substring'函数从第一个参量指定的缓冲区中拷贝一个字符串插入当前的缓冲区
+** 4.6 练习
+*** 4.6.1 编写simplified-end-of-buffer函数
