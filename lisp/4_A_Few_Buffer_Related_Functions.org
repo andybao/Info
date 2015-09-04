@@ -1,0 +1,41 @@
+* 第四章 与缓冲区有关的函数 (A Few Buffer-Related Functions)
+** 4.1 查找更多的信息
+- C-h f /fun_name/ RET: 返回函数 /fun_name/ 的文档
+- C-h v /variable/ RET: 返回变量 /variable/ 的文档
+*** 4.1.1 在源代码文件中查看一个函数
+- 使用find-tags函数(快捷键M-.)
+- 需要定义一个标记表(tags table)，参考12.5节
+** 4.2 简化的begining-of-buffer函数
+#+BEGIN_SRC lisp
+(defun simplified-begining-of-buffer ()
+  "Move point to the begining of the buffer;
+leave mark at previous position."
+  (interactive)
+  (push-mark) ;标记当前光标位置并加入标记环, C-x C-x可以返回到该标记
+  (goto-char (point-min)))
+#+END_SRC
+** 4.3 mark-whole-buffer函数的定义
+- 快捷键C-x h
+#+BEGIN_SRC lisp
+(defun mark-whole-buffer ()
+  "Put point at begining and mark at end of buffer"
+  (interactive)
+  (push-mark (point))
+  (push-mark (point-max))
+  (goto-char (point-min)))
+#+END_SRC
+** 4.4 append-to-buffer函数的定义
+- 域：缓冲区中介于位点和标记之间的区域
+- 从当前缓冲区中拷贝一个域到一个指定的缓冲区
+- insert-buffer-substring函数：从缓冲区提取一部分作为字符串，插入到另一个缓冲区
+#+BEGIN_SRC lisp
+(defun append-to-buffer (buffer start end)
+  "Append to specified buffer the text of the region.
+  It is inserted into that buffer before its point."
+  (interactive "BAppend to buffer: \nr")
+  (let ((oldbuf (current-buffer)))
+    (save-excursion
+      (set-buffer (get-buffer-create buffer))
+      (insert-buffer-substring oldbuf start end))))
+#+END_SRC
+*** 4.4.1 append-to-buffer函数的交互表达式
