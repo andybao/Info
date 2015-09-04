@@ -43,8 +43,8 @@ leave mark at previous position."
 (interactive "BAppend to buffer: \nr")
 #+END_SRC
 - 表达式有一个位于双引号中的参量，包含两部分，用"\n"分隔
-- 第一部分"BAppend to buffer:", "B"控制符要求输入缓冲区名并传给函数
-- "r"表示第二和第三个参数（start和end）绑定到位点和标记的值上
+- 第一部分'BAppend to buffer:', 'B'控制符要求输入缓冲区名并传给函数，参量buffer绑定到指定的缓冲区
+- 'r'表示第二和第三个参数（start和end）绑定到位点和标记的值上
 *** 4.4.3 append-to-buffer函数中的save-excursion表达式
 - save-excursion函数保存位点和标记的位置，当函数体中的其他表达式都被求值知乎恢复位点和标记到相应位置
 **** (set-buffer (get-buffer-create buffer))
@@ -57,3 +57,19 @@ leave mark at previous position."
 - 'insert-buffer-substring'函数从第一个参量指定的缓冲区中拷贝一个字符串插入当前的缓冲区
 ** 4.6 练习
 *** 4.6.1 编写simplified-end-of-buffer函数
+#+BEGIN_SRC lisp
+(defun simplified-end-of-buffer ()
+  (interactive)
+  (goto-char (point-max)))
+#+END_SRC
+*** 4.6.2 用if和get-buffer编写一个函数，说明某个缓冲区是否存在
+#+BEGIN_SRC lisp
+(defun 2-6-4 (buffer)
+  (interactive "BGive me a buffer: ")
+  (if (get-buffer buffer)
+      (message "The buffer is exist")
+    (message "The buffer isn't exist")))
+#+END_SRC
+*** TODO 4.6.3 用find-tag找到copy-to-buffer函数的源代码
+- 进一步学习find-tag，参考12.5节
+
