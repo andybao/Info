@@ -175,9 +175,23 @@ $ ./trace1.sh
 #+END_SRC
 * 第三章 查找和替换
 ** 3.1 查找文本
+- BRE: 基本正则表达式 (Basic Regular Expression)
+- ERE: 扩展正则表达式 (Extended Regular Expression)
+- POSIX: 可移植操作系统接口 (Portable Operating System Interface)
+**** 用于查找文本文件的三种程序
+- grep: 使用BRE
+- egrep: 使用ERE，相对消耗更多的资源
+- fgrep: 匹配固定字符串
 *** 3.1.1 简单的grep
 - grep默认是-F模式，即查找固定字符串
 #+BEGIN_SRC shell
 who | grep andybao
 #+END_SRC
 ** 3.2 正则表达式
+**** grep
+- gerp [options...] /pattern-spec/ [files...]
+- 匹配一个或多个模式的文本行
+- '-E' ERE匹配
+- '-F' 固定字符串匹配
+- '-i' 忽略大小写
+*** 3.2.1 什么是正则表达式
