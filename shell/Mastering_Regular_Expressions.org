@@ -159,3 +159,12 @@ H[1-6] *
 #+BEGIN_SRC 
 \$[0-9]+(\.[0-9][0-9])?
 #+END_SRC
+**** HTTP/HTML URL
+- 常见的URL: http://hostname/path.html
+- 连字符'-'放在字符组开头，保证它是一个普通字符，而不是用来表范围
+#+BEGIN_SRC 
+\<http://[-a-z0-9_.:]+/[-a-z0-9_:@&?=+,.!/~*%$]*\.html?\>
+\<http://[^ ]*\.html?\>
+#+END_SRC
+**** HTML tag
+
