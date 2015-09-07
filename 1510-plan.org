@@ -18,7 +18,7 @@
 | 渥太华 | 多伦多 | 10.8 |    11:00 |    12:07 | x          | T1         | AC449  | 19E 19F |
 | 多伦多 | 北京   | 10.8 |    14:50 |    16:05 | T3         | T3         | AC031  | 36J 36K |
 ** TODO 1.4 Todo 渥太华往返蒙特利尔车票
-** CANCEL 1.5 Todo 大瀑布行程
+** +CANCEL 1.5 Todo 大瀑布行程+
    - State "CANCEL"     from "TODO"       [2015-09-06 Sun 08:03]
 ** 1.6 护照和landing paper
 *** TODO Todo 复印landing paper两份
