@@ -395,11 +395,13 @@ Jeff(?=rey)
 #+END_SRC
 *** 2.12.4 几个顺序环视的例子
 - 把'Jeffs'替换为'Jeff's'
-#+BEGIN_SRC 
+#+BEGIN_SRC
 s/Jeffs/Jeff's/g #错误的 会匹配到'Jeffser'
 s/\bJeffs\b/Jeff's/g 
 s/\b(Jeff)(s)\b/$1'$2/g
 s/\bJeff(?=s\b)/Jeff'/g #'s\b'是顺序环视的一部分 所以's'不是最终的匹配文本 即不会被替换
 s/(?<=\bJeff)(?=s\b)/'/g #加入逆序环视 匹配到一个位置 加入单引号
-s/(?=s\b)(?<=\bJeff)/'/g #改变了顺序 但匹配的位置没有变
+s/(?=s\b)(?=<\bJeff)/'/g #改变了顺序 但匹配的位置没有变
 #+END_SRC
+****** TODO 逆序环视加/i参数后报错
+Variable length lookbehind not implemented in regex m/(?<=\bJeff)(?=s\b)/ at jeffs.pl line 2.
