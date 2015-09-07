@@ -271,12 +271,12 @@ $2 = ([CF])
 #+BEGIN_SRC 
 $input =~ m/^([-+]?[0-9]+(?:\.[0-9]*)?)\s*([CF])$/i
 #+END_SRC
-** 2.5 Perl中的正则表达式
-*** 2.5.1 $variable =~ m/regex/
+** 2.6 Perl中的正则表达式
+*** 2.6.1 $variable =~ m/regex/
 - m表示匹配(match)
 - 斜线标注正则表达式的边界
 - m/.../作为一个单元 返回true或者false
-*** 2.5.2 Perl的正则表达式简记法
+*** 2.6.2 Perl的正则表达式简记法
 | 符号 | 含义                              |
 |------+-----------------------------------|
 | \t   | 制表符                            |
@@ -288,3 +288,41 @@ $input =~ m/^([-+]?[0-9]+(?:\.[0-9]*)?)\s*([CF])$/i
 | \W   | 除'\w'外的任何字符 即[^a-zA-Z0-9] |
 | \d   | 数字 即[0-9]                      |
 | \D   | 除'\d'外的任何字符 即[^0-9]       |
+** 2.8 全局替换(global replacement)
+- s/.../.../g
+- 'g'表示当前文件满足匹配条件的文本全部替换
+** 2.9 休整股票价格
+- 保留小数点后两位数字
+- 如果第三位不为零 也需要保留
+- 删除其他数字
+- '12.3750000092' -> '12.375'
+- '12.375' -> '12.375'
+- '35.500' -> '35.50'
+#+BEGIN_SRC 
+$price =~ s/(\.\d\d[1-9]?)\d*/$1/
+#+END_SRC
+** 2.10 自动的编辑操作
+- 在文件中用'read'替换'sysread'
+- 参数'e'表示整个程序接在命令的后面
+- 参数'p'表示对目标文件每一行进行查找和替换
+- 参数'i'表示将替换的结果写回到文件
+#+BEGIN_SRC 
+% perl -p -i -e 's/sysread/read/g' file
+#+END_SRC
+** 2.11 处理邮件的小工具
+*** E-mail Message范本
+#+BEGIN_SRC 
+From elvis Thu Feb 29 11:15 2007
+Received: from elvis@localhost by tabloid.org (8.11.3) id KA8CMY
+Received: from tabloid.org by gateway.net (8.12.5/2) id N8XBK
+To: jfriedl@regex.info (Jeffrey Friedl)
+From: elvis@tabloid.org (The King)
+Date: The, Feb 29 2007 11:15
+Message-Id: <20070229399939.KA8CMY@tabloid.org>
+Subject: Be seein' ya around
+Replay-To: elvis@hh.tabloid.org
+X-Mailer: Madam Zelda's Psychic Orb [version 3.7 PL92]
+
+Sorry I haven't been around lately.
+Elvis
+#+END_SRC
