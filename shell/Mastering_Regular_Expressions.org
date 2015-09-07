@@ -310,7 +310,7 @@ $price =~ s/(\.\d\d[1-9]?)\d*/$1/
 % perl -p -i -e 's/sysread/read/g' file
 #+END_SRC
 ** 2.11 处理邮件的小工具
-*** E-mail Message范本
+*** 2.11.1 E-mail Message范本
 #+BEGIN_SRC 
 From elvis Thu Feb 29 11:15 2007
 Received: from elvis@localhost by tabloid.org (8.11.3) id KA8CMY
@@ -320,9 +320,51 @@ From: elvis@tabloid.org (The King)
 Date: The, Feb 29 2007 11:15
 Message-Id: <20070229399939.KA8CMY@tabloid.org>
 Subject: Be seein' ya around
-Replay-To: elvis@hh.tabloid.org
+Reply-To: elvis@hh.tabloid.org
 X-Mailer: Madam Zelda's Psychic Orb [version 3.7 PL92]
 
 Sorry I haven't been around lately.
 Elvis
 #+END_SRC
+*** 2.11.2 期望输出
+#+BEGIN_SRC 
+To: elvis@hh.tabloid.org (The King)
+From: jfriedl@regex.info (Jeffrey Friedl)
+Subject: Re: Be Seein' ya around
+
+On Thu, Feb 29 2007 11:15 The King wrote:
+|> Sorry I haven't been around lately.
+|> Elvis
+#+END_SRC
+*** 2.11.3 '<>'操作符
+- '<>'一次从文件中读出一行数据
+- 从文件中提取header
+#+BEGIN_SRC perl
+while ($line = <>) {
+  if ($line =~ m/^\s*$/) {
+    last; #跳出循环
+  }
+  #提取主题
+  if ($line =~ m/^Subject: (.*)/i) {
+    $subject = $1;
+  }
+  #Date
+  if ($line =~ m/^Date: (.*)/i) {
+    $date = $1;
+  }
+  #Reply-To
+  if ($line =~ m/^Reply-To: (.*)/i) {
+    $reply_address = $1;
+  }
+  #From
+  if ($line =~ m/^From: (\S+) \(([^()]*)\)/i) {
+    $reply_address = $1;
+    $from_name = $2;
+  }  
+}
+print "To: $reply_address ($from_name)\n";
+print "From: jfriedl\@regex.info (Jeffrey Friedl)\n";
+print "Subject: Re: $subject\n";
+print "\n";
+#+END_SRC
+*** 2.11.4 
