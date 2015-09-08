@@ -8,11 +8,11 @@
 **** 匹配若干字符之一
 - e匹配e a匹配a [ea]匹配e或者a
 - 匹配'grey'或者'gray'
-#+BEGIN_SRC 
+#+BEGIN_SRC perl
 gr[ea]y
 #+END_SRC
 - 匹配<H1>, <H2>, ...
-#+BEGIN_SRC 
+#+BEGIN_SRC perl
 <H[123456]>
 #+END_SRC
 **** 字符组元字符'-'
@@ -23,19 +23,19 @@ gr[ea]y
 **** 排除型字符组 [^...]
 - 匹配任何不包括在排除型字符组中的字符
 - 匹配除了123456以外任何字符
-#+BEGIN_SRC 
+#+BEGIN_SRC perl
 [^1-6]
 #+END_SRC
 *** 1.1.3 用点号匹配任意字符
 - 匹配'03/19/76'和'03-19-76'
-#+BEGIN_SRC 
+#+BEGIN_SRC perl
 03.19.76
 #+END_SRC
 *** 1.1.4 多选结构
 **** 匹配任意子表达式
 - '|'表示或
 - 匹配Bob或Robert
-#+BEGIN_SRC 
+#+BEGIN_SRC perl
 Bob|Robert
 #+END_SRC
 - 在上面的组合中，子表达式称为多选分支
@@ -44,7 +44,7 @@ Bob|Robert
 - 字符组只能匹配文本中的单个字符
 - 多选结构可以匹配任意长度的文本
 - 匹配以From: /Subject: /Date: 开头的文本
-#+BEGIN_SRC 
+#+BEGIN_SRC perl
 ^(From|Subject|Date): 
 #+END_SRC
 *** 1.1.5 忽略大小写
@@ -53,7 +53,7 @@ Bob|Robert
 **** 元字符序列
 - '\<'和'\>'分别匹配单词的开头和结束位置
 - 匹配以cat开头的单词
-#+BEGIN_SRC 
+#+BEGIN_SRC perl
 \<cat
 #+END_SRC
 *** 1.1.7 小结
@@ -71,12 +71,12 @@ Bob|Robert
 *** 1.1.8 可选项元素
 - '?'表示可选项，对紧邻的左侧元素有效
 - 匹配'color'和'colour'
-#+BEGIN_SRC 
+#+BEGIN_SRC perl
 colou?r
 #+END_SRC
 - 'u?'表示u可有可没有
 - 匹配'4'和'4th'
-#+BEGIN_SRC 
+#+BEGIN_SRC perl
 4(th)?
 #+END_SRC
 *** 1.1.9 其他量词：重复出现
@@ -85,27 +85,27 @@ colou?r
 - '?''+''*'统称为量词
 **** 匹配HTML规范的tag
 - 在tag结尾的>字符之前，可以出现任意长度的空格，例如<H3 >, <H4   >
-#+BEGIN_SRC 
+#+BEGIN_SRC perl
 H[1-6] *
 #+END_SRC
 **** 匹配<HR SIZE=14>
 - '>'前可以出现任意多个空格
 - '='两边可以出现任意多个空格
 - HR和SIZE间最少有一个空格
-#+BEGIN_SRC 
+#+BEGIN_SRC perl
 <HR +SIZE *= *14 *>
 #+END_SRC
 **** 匹配数值
 - 数值是由一位或多位数字构成，例如3，12，897
-#+BEGIN_SRC 
+#+BEGIN_SRC perl
 [0-9]+
 #+END_SRC
 **** 匹配<HR SIZE=xx> 任意数值
-#+BEGIN_SRC 
+#+BEGIN_SRC perl
 <HR +SIZE *= *[0-9]+ *>
 #+END_SRC
 **** 匹配<HR>
-#+BEGIN_SRC 
+#+BEGIN_SRC perl
 <HR( +SIZE *= *[0-9]+)? *>
 #+END_SRC
 **** 小结
@@ -117,7 +117,7 @@ H[1-6] *
 **** 规定重现次数的范围：区间
 - 区间量词：'...{min,max}'
 - 匹配1-5个字母
-#+BEGIN_SRC 
+#+BEGIN_SRC perl
 [a-zA-Z]{1,5}
 #+END_SRC
 *** 1.1.10 括号及反向引用
@@ -125,20 +125,20 @@ H[1-6] *
 **** Eg.: 逐步匹配'the the'
 - 'the the'会错误匹配到'the theory'
 - 匹配'the the'
-#+BEGIN_SRC 
+#+BEGIN_SRC perl
 \<the the\>
 #+END_SRC
 - 匹配第一个the为任意字符
-#+BEGIN_SRC 
+#+BEGIN_SRC perl
 [A-Za-z]+
 #+END_SRC
 - 匹配第二个the为元字符序列
-#+BEGIN_SRC 
+#+BEGIN_SRC perl
 \<([A-Za-z] +) +\1\>
 #+END_SRC
 **** 多个括号和多个反向引用
 - 匹配'A3 A3'
-#+BEGIN_SRC 
+#+BEGIN_SRC perl
 ([A-Z])([0-9]) +\1\2
 #+END_SRC
 *** 1.1.11 神奇的转义
@@ -147,31 +147,31 @@ H[1-6] *
 *** 1.2.1 更多的例子
 **** 变量名
 - 标识符只包含字母，数字和下划线，并且不能以数字开头
-#+BEGIN_SRC 
+#+BEGIN_SRC perl
 [a-zA-Z_][a-zA-Z_0-9]*
 #+END_SRC
 **** 引号内的字符串
 - '[^"]'匹配除双引号以外的任意字符
-#+BEGIN_SRC 
+#+BEGIN_SRC perl
 "[^"]*"
 #+END_SRC
 **** 美元金额（可能包含小数）
-#+BEGIN_SRC 
+#+BEGIN_SRC perl
 \$[0-9]+(\.[0-9][0-9])?
 #+END_SRC
 **** HTTP/HTML URL
 - 常见的URL: http://hostname/path.html
 - 连字符'-'放在字符组开头，保证它是一个普通字符，而不是用来表范围
-#+BEGIN_SRC 
+#+BEGIN_SRC perl
 \<http://[-a-z0-9_.:]+/[-a-z0-9_:@&?=+,.!/~*%$]*\.html?\>
 \<http://[^ ]*\.html?\>
 #+END_SRC
 **** 表示时刻的文字 例如'9:17am'或者'12:30pm'
-#+BEGIN_SRC 
+#+BEGIN_SRC perl
 (1[012]|[0-9]):[0-5][0-9] (am|pm)
 #+END_SRC
 **** 24小时制的时间
-#+BEGIN_SRC 
+#+BEGIN_SRC perl
 (0?[0-9]|1[0-9])|2[0-3]):[0-5][0-9]
 ([01]?[0-9])|2[0-3]):[0-5][0-9]
 #+END_SRC
@@ -208,7 +208,7 @@ if ($celsius =~ m/^[0-9]+$/) {
 #+END_SRC
 ** 2.3 向更实用的程序前进
 *** 2.3.1 匹配负数和小数
-#+BEGIN_SRC 
+#+BEGIN_SRC perl
 ^[-+]?[0-9]+(\.[0-9]*)?$
 #+END_SRC
 ** 2.4 成功匹配的附带作用
@@ -240,35 +240,35 @@ if ($input =~ m/^([-+]?[0-9]+)([CF])$/) { #注意表达式中的括号用于$1�
 #+END_SRC
 ** 2.5 错综复杂的正则表达式
 *** 2.5.1 增加浮点数
-#+BEGIN_SRC 
+#+BEGIN_SRC perl
 ^([-+]?[0-9]+(\.[0-9]*)?)([CF])$
 #+END_SRC
 *** 2.5.2 括号和赋值$x
 - 根据左括号依次赋值
-#+BEGIN_SRC 
+#+BEGIN_SRC perl
 $1 = ([-+]?[0-9]+(\.[0-9]*)?)
 $2 = (\.[0-9]*)
 $3 = ([CF])
 #+END_SRC
 *** 2.5.3 匹配空白字符（空格 制表符）
-#+BEGIN_SRC 
+#+BEGIN_SRC perl
 [ \t]*
 #+END_SRC
 *** 2.5.4 非捕获型括号'(?:...)'
 - 只用于分组，不赋值给$x
-#+BEGIN_SRC 
+#+BEGIN_SRC perl
 ^([-+]?[0-9]+(?:\.[0-9]*)?)([CF])$
 $1 = ([-+]?[0-9]+(\.[0-9]*)?)
 $2 = ([CF])
 #+END_SRC
 *** 2.5.5 用\s匹配所有'空白'
 - '\s'表示所有空白字符包括空格符 制表符 换行符和回车符
-#+BEGIN_SRC 
+#+BEGIN_SRC perl
 \s*
 #+END_SRC
 *** 2.5.6 i修饰符
 - Perl中把i放在m/.../结构后表示不区分大小写
-#+BEGIN_SRC 
+#+BEGIN_SRC perl
 $input =~ m/^([-+]?[0-9]+(?:\.[0-9]*)?)\s*([CF])$/i
 #+END_SRC
 ** 2.6 Perl中的正则表达式
@@ -296,7 +296,7 @@ $input =~ m/^([-+]?[0-9]+(?:\.[0-9]*)?)\s*([CF])$/i
 *** 2.7.2 i修饰符
 - i对regex起作用 可以匹配jeff的任何大小写形式 jEff jeFF ...
 - i对replacement不起作用
-#+BEGIN_SRC 
+#+BEGIN_SRC perl
 $var =~ s/\bJeff\b/Jeff/i
 #+END_SRC
 ** 2.8 全局替换(global replacement)
@@ -309,7 +309,7 @@ $var =~ s/\bJeff\b/Jeff/i
 - '12.3750000092' -> '12.375'
 - '12.375' -> '12.375'
 - '35.500' -> '35.50'
-#+BEGIN_SRC 
+#+BEGIN_SRC perl
 $price =~ s/(\.\d\d[1-9]?)\d*/$1/
 #+END_SRC
 ** 2.10 自动的编辑操作
@@ -317,12 +317,12 @@ $price =~ s/(\.\d\d[1-9]?)\d*/$1/
 - 参数'e'表示整个程序接在命令的后面
 - 参数'p'表示对目标文件每一行进行查找和替换
 - 参数'i'表示将替换的结果写回到文件
-#+BEGIN_SRC 
+#+BEGIN_SRC perl
 % perl -p -i -e 's/sysread/read/g' file
 #+END_SRC
 ** 2.11 处理邮件的小工具
 *** 2.11.1 E-mail Message范本
-#+BEGIN_SRC 
+#+BEGIN_SRC perl
 From elvis Thu Feb 29 11:15 2007
 Received: from elvis@localhost by tabloid.org (8.11.3) id KA8CMY
 Received: from tabloid.org by gateway.net (8.12.5/2) id N8XBK
@@ -338,7 +338,7 @@ Sorry I haven't been around lately.
 Elvis
 #+END_SRC
 *** 2.11.2 期望输出
-#+BEGIN_SRC 
+#+BEGIN_SRC perl
 To: elvis@hh.tabloid.org (The King)
 From: jfriedl@regex.info (Jeffrey Friedl)
 Subject: Re: Be Seein' ya around
@@ -400,13 +400,13 @@ if (not defined($reply_address)
 - 从右向左查看文本 如果能够匹配表达式 返回true
 *** 2.12.3 环视匹配的是位置而不是字符
 - 匹配'Jeffrey'中的'Jeff'
-#+BEGIN_SRC 
+#+BEGIN_SRC perl
 (?=Jeffrey)Jeff
 Jeff(?=rey)
 #+END_SRC
 *** 2.12.4 几个顺序环视的例子
 - 把'Jeffs'替换为'Jeff's'
-#+BEGIN_SRC
+#+BEGIN_SRC perl
 s/Jeffs/Jeff's/g #错误的 会匹配到'Jeffser'
 s/\bJeffs\b/Jeff's/g 
 s/\b(Jeff)(s)\b/$1'$2/g
@@ -419,7 +419,7 @@ s/(?=s\b)(?=<\bJeff)/'/g #改变了顺序 但匹配的位置没有变
 Variable length lookbehind not implemented in regex m/(?<=\bJeff)(?=s\b)/ at jeffs.pl line 2.
 *** 2.12.5 表示指定字符格式的若干倍
 - '(...)+'表示若干倍
-#+BEGIN_SRC 
+#+BEGIN_SRC perl
 (\d\d\d)+ #匹配有一个或者多个3个连着的数字
 #+END_SRC
 - 在数字中加入逗号 '1,234,567'
