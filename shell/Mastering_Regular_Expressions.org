@@ -8,7 +8,7 @@
 **** 匹配若干字符之一
 - e匹配e a匹配a [ea]匹配e或者a
 - 匹配'grey'或者'gray'
-#+BEGIN_SRC perl
+#+BEGIN_SRC
 gr[ea]y
 #+END_SRC
 - 匹配<H1>, <H2>, ...
@@ -322,7 +322,7 @@ $price =~ s/(\.\d\d[1-9]?)\d*/$1/
 #+END_SRC
 ** 2.11 处理邮件的小工具
 *** 2.11.1 E-mail Message范本
-#+BEGIN_SRC perl
+#+BEGIN_SRC
 From elvis Thu Feb 29 11:15 2007
 Received: from elvis@localhost by tabloid.org (8.11.3) id KA8CMY
 Received: from tabloid.org by gateway.net (8.12.5/2) id N8XBK
@@ -338,7 +338,7 @@ Sorry I haven't been around lately.
 Elvis
 #+END_SRC
 *** 2.11.2 期望输出
-#+BEGIN_SRC perl
+#+BEGIN_SRC
 To: elvis@hh.tabloid.org (The King)
 From: jfriedl@regex.info (Jeffrey Friedl)
 Subject: Re: Be Seein' ya around
@@ -424,8 +424,9 @@ Variable length lookbehind not implemented in regex m/(?<=\bJeff)(?=s\b)/ at jef
 #+END_SRC
 - 在数字中加入逗号 '1,234,567'
 #+BEGIN_SRC perl
-$pop = 1234567
-$pop =~ s/(?<=\d)(?=(?:\d\d\d)+$)/,/g
+$pop = 1234567;
+$pop =~ s/(?<=\d)(?=(?:\d\d\d)+$)/,/g;
+print "$pop\n";
 #+END_SRC
 *** 2.12.6 单词分界符和否定环视
 **** 四种类型的环视
@@ -443,3 +444,4 @@ $pop =~ s/(?<=\d)(?=(?:\d\d\d)+$)/,/g
 (?<=\w)(?!\w) #单词结束表达式
 (?<!\w)(?=\w)|(?<=\w)(?!\w) #'\b'的表达式
 #+END_SRC
+
