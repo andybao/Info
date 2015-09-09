@@ -1,9 +1,10 @@
 * 第一章 正则表达式入门
 ** 1.1 Egrep元字符
 *** 1.1.1 行的开始和结束
-- 脱字符号 ^ 代表一行的开始
-- 美元符号 $ 代表一行的结束
+- 脱字符号 ^ 代表一行字符串的开始
+- 美元符号 $ 代表一行字符串的结束
 - 这两个符号匹配的都是位置，而不是具体的字符
+- 默认不匹配逻辑行，见2.13.2
 *** 1.1.2 字符组 [...]
 **** 匹配若干字符之一
 - e匹配e a匹配a [ea]匹配e或者a
@@ -468,4 +469,47 @@ $pop =~ s/(\d)(?=(\d\d\d)+(?!\d))/$1,/g; #匹配的是一个值 而不是位置
 - 匹配位置的终点是匹配的位置
 - 匹配文本的终点是匹配文本的末尾
 ** 2.13 Text-to-HTML转换
-*** 
+- 转换多行文本到一个字符串
+#+BEGIN_SRC perl
+undef $/; #进入"file-slurp"(文件读取)模式
+$text = <>; #读入命令行中指定的第一个文件
+#+END_SRC
+*** 2.13.1 处理特殊字符
+| 文本字符 | HTML编码 |
+|----------+----------|
+| &        | &amp     |
+| <        | &lt      |
+| >        | &gt      | 
+#+BEGIN_SRC perl
+$text =~ s/&/&amp;/g;
+$text =~ s/</&lt;/g;
+$text =~ s/>/&gt;/g;
+#+END_SRC  
+*** 2.13.2 分隔段落
+**** 简单匹配并替换空行
+- HTML tag中<p>表示分段
+- '^'和'$'默认匹配字符串的开头和结束位置
+#+BEGIN_SRC perl
+$text =~ s/^$/<p>/g;
+#+END_SRC
+**** Perl中'增强的行锚点'匹配模式
+- '/m'打开模式
+- '^'和'$'会从字符串模式切换至逻辑行模式
+#+BEGIN_SRC perl
+$text =~ s/^$/<p>/mg;
+#+END_SRC
+**** 最终匹配并替换空行
+- 空行中可能含有一个或多个空格符 制表符和回车符
+#+BEGIN_SRC perl
+$text =~ s/^\s*$/<p>/mg;
+#+END_SRC
+*** 2.13.3 将E-mail地址转换为超链接形式
+- 识别E-mail地址，转换为'mailto'链接
+#+BEGIN_SRC 
+wenyu.bao@gmail.com
+<a href="mailto:wenyu.bao@gmail.com">wenyu.bao@gmail.com</a>
+#+END_SRC
+- E-mail地址的基本形式:username@hostname
+#+BEGIN_SRC perl
+$text =~ s/\b(username regex\@hostname regex)\b/<a href="mailto:$1">$1<\/a>/g;
+#+END_SRC
