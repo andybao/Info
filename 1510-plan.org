@@ -90,6 +90,24 @@
 #2110 - 29 SINGER CRT. NORTH YORK，ON，M2K0B3，CANADA
 ** 2.2 sin号码
 ** TODO 2.3 Todo 查看办理注意事项
+* 3 加拿大景点
+** 3.1 多伦多
+*** 多伦多大学(University of Toronto)
+*** 加拿大国家电视塔(CN Tower)
+*** 湖心岛(Toronto Islands)
+*** 圣劳伦斯市场(St. Lawrence Market)
+** 3.2 渥太华
+*** 国会山(Parliament Hill)
+*** 丽都运河(Rideau Canal)
+*** 国家美术馆(National Gallery of Canada)
+*** 总督府(Rideau Hall)
+*** 和平塔(Peace Tower)
+*** 加拿大皇家铸币厂(Royal Canadian Mint)
+** 3.3 蒙特利尔
+*** 麦吉尔大学(McGill University)
+*** 诺特丹圣母大教堂(Notre-Dame Basilica of Montreal)
+*** 圣约瑟夫大教堂(Saint Joseph's Oratory of Mount Royal)
+*** 老港口(Old Port)
 * TODO 3 Todo Daily detail
 ** Day 1 - 930
 
