@@ -1,9 +1,11 @@
 * 1 国内准备
 ** 1.1 行李
-*** TODO 1.1.1 Todo 托运行李箱 x2 - 扎带和贴画
-*** DOING 1.1.2 从张家拿被子，真空压缩袋
+*** DOING 1.1.1 Todo 托运行李箱 x2 - 扎带和贴画
+    - State "DOING"      from "TODO"       [2015-09-11 Fri 07:49]
+- 贴画 Done
+*** DOING 1.1.2 拿被子，真空压缩袋
     - State "DOING"      from "TODO"       [2015-09-02 Wed 07:13]
-- 已购买压缩袋
+- 压缩袋 Done
 *** DOING 1.1.3 Todo 整理要带的书
     - State "DOING"      from "TODO"       [2015-09-06 Sun 08:51]
 ** 1.2 现金
@@ -86,8 +88,11 @@
 - 火车：http://www.viarail.ca/en
 * 2 加拿大代办事项
 ** 2.1 枫叶卡
-－ 邮寄地址
+*** 打印邮寄地址
 #2110 - 29 SINGER CRT. NORTH YORK，ON，M2K0B3，CANADA
+*** 修改网上地址
+- http://dwz.cn/1GF0te
+- https://services3.cic.gc.ca/ecas/?app=coanotify&lang=en
 ** 2.2 sin号码
 ** TODO 2.3 Todo 查看办理注意事项
 * 3 加拿大景点
