@@ -1,17 +1,20 @@
 * 1 国内准备
 ** 1.1 行李
-*** DOING 1.1.1 Todo 托运行李箱 x2 - 扎带和贴画
+*** DONE 1.1.1 Todo 托运行李箱 x2 - 贴画
+    - State "DONE"       from "DOING"      [2015-09-22 Tue 07:54]
     - State "DOING"      from "TODO"       [2015-09-11 Fri 07:49]
 - 贴画 Done
-*** DOING 1.1.2 拿被子，真空压缩袋
+*** DONE 1.1.2 拿被子，真空压缩袋
+    - State "DONE"       from "DOING"      [2015-09-22 Tue 07:38]
     - State "DOING"      from "TODO"       [2015-09-02 Wed 07:13]
 - 压缩袋 Done
 *** DOING 1.1.3 Todo 整理要带的书
     - State "DOING"      from "TODO"       [2015-09-06 Sun 08:51]
-** 1.2 现金
+** 1.2 资金
 *** DOING Doing 3000加拿大元
     - State "DOING"      from "TODO"       [2015-09-01 Tue 07:54]
 - 已经取了1100元
+*** TODO 资产证明
 ** 1.3 机票
 | 出发地 | 目的地 | 日期 | 出发时间 | 抵达时间 | 出港航站楼 | 进港航站楼 | 航班号 | 座位号  |
 |--------+--------+------+----------+----------+------------+------------+--------+---------|
@@ -90,6 +93,7 @@
 - 灰狗大巴：https://www.greyhound.ca/default.aspx
 - busbud: https://www.busbud.com/zh
 - 火车：http://www.viarail.ca/en
+** TODO 1.10 goods to follow
 * 2 加拿大代办事项
 ** 2.1 枫叶卡
 *** 打印邮寄地址
@@ -99,6 +103,15 @@
 - https://services3.cic.gc.ca/ecas/?app=coanotify&lang=en
 ** 2.2 sin号码
 ** TODO 2.3 Todo 查看办理注意事项
+*** 过关的问题
+- 谁是主申
+- 有没有拒签过
+- 有没有犯罪记录
+- 婚姻状况有没有变化
+- 带了多少现金
+*** 回答问题注意事项 
+1. 如果问起停留多久，回答not sure
+2. 如果VO对资金有怀疑，主动出示资金证明
 ** 2.4 苹果店
 *** 多伦多
 **** Eaton Centre
@@ -112,6 +125,7 @@
 - Mon - Fri 9:30am to 9:00pm
 - Sat 9:30am to 7:00pm
 - Sun 11:00am to 6:00pm
+** 2.5 拍枫叶卡照片
 * 3 加拿大景点
 ** 3.1 多伦多
 *** 多伦多大学(University of Toronto)
@@ -132,5 +146,3 @@
 *** 老港口(Old Port)
 * TODO 3 Todo Daily detail
 ** Day 1 - 930
-
-
