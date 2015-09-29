@@ -8,7 +8,8 @@
     - State "DONE"       from "DOING"      [2015-09-22 Tue 07:38]
     - State "DOING"      from "TODO"       [2015-09-02 Wed 07:13]
 - 压缩袋 Done
-*** DOING 1.1.3 Todo 整理要带的书
+*** DONE 1.1.3 Todo 整理要带的书
+    - State "DONE"       from "DOING"      [2015-09-29 Tue 08:08]
     - State "DOING"      from "TODO"       [2015-09-06 Sun 08:51]
 ** 1.2 资金
 *** DOING Doing 3000加拿大元
@@ -52,7 +53,8 @@
 180 Maclaren Street, Ottawa (Ontario)
 
 +16132321121
-** DOING 1.8 Todo 旅馆至各处通勤方式
+** DONE 1.8 旅馆至各处通勤方式
+   - State "DONE"       from "DOING"      [2015-09-29 Tue 08:08]
    - State "DOING"      from "TODO"       [2015-09-02 Wed 07:14]
 *** 9.30 多伦多
 **** 机场 -> 皇家橡树旅馆
@@ -93,7 +95,8 @@
 - 灰狗大巴：https://www.greyhound.ca/default.aspx
 - busbud: https://www.busbud.com/zh
 - 火车：http://www.viarail.ca/en
-** TODO 1.10 goods to follow
+** CANCEL 1.10 goods to follow
+   - State "CANCEL"     from "TODO"       [2015-09-29 Tue 08:08]
 * 2 加拿大代办事项
 ** 2.1 枫叶卡
 *** 打印邮寄地址
@@ -101,8 +104,9 @@
 *** 修改网上地址
 - http://dwz.cn/1GF0te
 - https://services3.cic.gc.ca/ecas/?app=coanotify&lang=en
+** DONE 2.3 查看办理注意事项
+   - State "DONE"       from "TODO"       [2015-09-29 Tue 08:09]
 ** 2.2 sin号码
-** TODO 2.3 Todo 查看办理注意事项
 *** 过关的问题
 - 谁是主申
 - 有没有拒签过
