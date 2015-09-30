@@ -97,6 +97,7 @@
 - 火车：http://www.viarail.ca/en
 ** CANCEL 1.10 goods to follow
    - State "CANCEL"     from "TODO"       [2015-09-29 Tue 08:08]
+** 1.11 Frank电话：+1(416)8293457
 * 2 加拿大代办事项
 ** 2.1 枫叶卡
 *** 打印邮寄地址
@@ -104,19 +105,21 @@
 *** 修改网上地址
 - http://dwz.cn/1GF0te
 - https://services3.cic.gc.ca/ecas/?app=coanotify&lang=en
-** DONE 2.3 查看办理注意事项
+** DONE 2.2 查看办理注意事项
    - State "DONE"       from "TODO"       [2015-09-29 Tue 08:09]
-** 2.2 sin号码
 *** 过关的问题
 - 谁是主申
 - 有没有拒签过
 - 有没有犯罪记录
 - 婚姻状况有没有变化
 - 带了多少现金
+- 伴侣的名字，结婚多久
+- 有没有小孩
 *** 回答问题注意事项 
-1. 如果问起停留多久，回答not sure
-2. 如果VO对资金有怀疑，主动出示资金证明
-** 2.4 苹果店
+1. 问起停留多久，回答not sure
+2. VO对资金有怀疑，主动出示资金证明
+3. 问地址，说明是自己住的地址
+** 2.3 苹果店
 *** 多伦多
 **** Eaton Centre
 - 220 Yonge Street
@@ -129,7 +132,7 @@
 - Mon - Fri 9:30am to 9:00pm
 - Sat 9:30am to 7:00pm
 - Sun 11:00am to 6:00pm
-** 2.5 拍枫叶卡照片
+** 2.4 拍枫叶卡照片
 * 3 加拿大景点
 ** 3.1 多伦多
 *** 多伦多大学(University of Toronto)
