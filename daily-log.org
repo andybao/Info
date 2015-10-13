@@ -1,7 +1,14 @@
 * 2015
 ** October
 *** 13
-**** TODO How to use selenium python script in robot
-**** TODO robot framework basic
-**** TODO Selenium python document serach
-**** TODO Selenium python develop basic
+**** Work
+***** HANGUP How to use selenium python script in robot
+      - State "HANGUP"     from "DOING"      [2015-10-13 Tue 10:48]
+     - State "DOING"      from "TODO"       [2015-10-13 Tue 10:22]
+****** http://robotframework.googlecode.com/hg/doc/python/PythonTutorial.html 
+***** HANGUP robot framework basic
+      - State "HANGUP"     from "DOING"      [2015-10-13 Tue 10:48]
+     - State "DOING"      from "TODO"       [2015-10-13 Tue 10:21]
+***** TODO Selenium python document serach
+***** TODO Selenium python develop basic
+**** Life
