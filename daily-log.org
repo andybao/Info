@@ -3,12 +3,24 @@
 *** 13
 **** Work
 ***** HANGUP How to use selenium python script in robot
+      - State "HANGUP"     from "DOING"      [2015-10-13 Tue 17:12]
+      - State "DOING"      from "HANGUP"     [2015-10-13 Tue 13:28]
       - State "HANGUP"     from "DOING"      [2015-10-13 Tue 10:48]
      - State "DOING"      from "TODO"       [2015-10-13 Tue 10:22]
-****** http://robotframework.googlecode.com/hg/doc/python/PythonTutorial.html 
+- https://code.google.com/p/robotframework/wiki/RemoteLibrary
+- http://robotframework.googlecode.com/hg/doc/python/PythonTutorial.html#writing-test-libraries
+***** HANGUP RIDE - robot framework test case development environment
+      - State "HANGUP"     from "DOING"      [2015-10-13 Tue 17:12]
+      - State "DOING"      from ""           [2015-10-13 Tue 15:11]
+- https://github.com/robotframework/RIDE/wiki
 ***** HANGUP robot framework basic
       - State "HANGUP"     from "DOING"      [2015-10-13 Tue 10:48]
      - State "DOING"      from "TODO"       [2015-10-13 Tue 10:21]
 ***** TODO Selenium python document serach
 ***** TODO Selenium python develop basic
-**** Life
+**** Technology
+***** HANGUP Python basic
+      - State "HANGUP"     from "DOING"      [2015-10-13 Tue 12:47]
+      - State "DOING"      from ""           [2015-10-13 Tue 11:16]
+****** Think Python
+- http://www.greenteapress.com/thinkpython/html/index.html
