@@ -1,0 +1,7 @@
+* 2015
+** October
+*** 13
+**** TODO How to use selenium python script in robot
+**** TODO robot framework basic
+**** TODO Selenium python document serach
+**** TODO Selenium python develop basic
