@@ -7,6 +7,7 @@
     标题加TODO
     C-c C-t 修改当前状态
     C-c C-a a 添加附件
+    *粗体*
 *   Lisp
     M-C-\ 在区域中缩排练
     C-x C-e 执行语句，返回值出现在回显区
@@ -145,6 +146,7 @@ RET
     C-y 召回(yank)复制/移除的区域/行
     M-y 召回更早的内容 (在kill缓冲区内循环)
     C-x C-x 交换光标和标记
+    C-x h mark whole buffer
       
     C-t 交换两个字符的位置
     M-t 交换两个单词的位置
@@ -186,6 +188,7 @@ RET
     C-h i 打开info阅读器
     C-h C-f 显示emacs FAQ
     C-h p 显示本机Elisp包的信息
+    C-h m (describe-mode)
       
 *   使用正则表达式(Regular expression)搜索/替换
     可在正则表达式中使用的符号:
