@@ -1,0 +1,155 @@
+* 3. An Informal Introduction to Python
+** 3.2. First Steps Towards Programming
+#+BEGIN_SRC python
+a, b = 0, 1
+while b < 10:
+    print b
+    a, b = b, a + b
+
+python test.py
+1
+1
+2
+3
+5
+8
+#+END_SRC
+#+BEGIN_SRC python
+a, b = 0, 1
+while b < 10:
+    print b,
+    a, b = b, a + b
+
+python test.py
+1 1 2 3 5 8
+#+END_SRC
+* 4. More Control Flow Tools
+** 4.1. if Statements
+#+BEGIN_SRC python
+x = int(raw_input("Please enter an integer: "))
+if x < 0:
+    x = 0
+    print 'Negative changed to zero'
+elif x == 0:
+    print 'Zero'
+elif x == 1:
+    print 'Single'
+else:
+    print 'More'
+#+END_SRC
+** 4.2. for Statements
+#+BEGIN_SRC python
+words = ['cat', 'window', 'defenestrate']
+for w in words:
+    print w, len(w)
+
+$ python test.py
+cat 3
+window 6
+defenestrate 12
+#+END_SRC
+- If you need to modify the sequence you are iterating over while inside the loop (for example to duplicate selected items), it is
+recommended that you first make a copy. Iterating over a sequence does not implicitly make a copy. The slice notation makes this
+especially convenient:
+#+BEGIN_SRC python
+words = ['cat', 'window', 'defenestrate']
+for w in words[:]:
+    if len(w) > 6:
+        words.insert(0,w)
+
+print words
+
+$ python test.py
+['defenestrate', 'cat', 'window', 'defenestrate']
+#+END_SRC
+** 4.3. The range() Function
+#+BEGIN_SRC python
+>>> range(10)
+[0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+>>> range(5, 10)
+[5, 6, 7, 8, 9]
+>>> range(0, 10, 3)
+[0, 3, 6, 9]
+>>> range(-10, -100, -30)
+[-10, -40, -70]
+
+>>> a = ['Mary', 'had', 'a', 'little', 'lamb']
+>>> for i in range(len(a)):
+...     print i, a[i]
+...
+0 Mary
+1 had
+2 a
+3 little
+4 lamb
+#+END_SRC
+** 4.4. break and continue Statements, and else Clauses on Loops
+- Thinking the different between 'break' and 'continue'
+#+BEGIN_SRC python
+>>> for n in range(2, 10):
+...     for x in range(2, n):
+...         if n % x == 0:
+...             print n, 'equals', x, '*', n/x
+...             break
+...     else:
+...         # loop fell through without finding a factor
+...         print n, 'is a prime number'
+...
+2 is a prime number
+3 is a prime number
+4 equals 2 * 2
+5 is a prime number
+6 equals 2 * 3
+7 is a prime number
+8 equals 2 * 4
+9 equals 3 * 3
+#+END_SRC
+#+BEGIN_SRC python
+>>> for num in range(2, 10):
+...     if num % 2 == 0:
+...         print "Found an even number", num
+...         continue
+...     print "Found a number", num
+Found an even number 2
+Found a number 3
+Found an even number 4
+Found a number 5
+Found an even number 6
+Found a number 7
+Found an even number 8
+Found a number 9
+#+END_SRC
+** 4.7. More on Defining Functions
+*** 4.7.2. Keyword Arguments
+- When a final formal parameter of the form **name is present, it receives a dictionary (see Mapping Types — dict) containing all
+keyword arguments except for those corresponding to a formal parameter. This may be combined with a formal parameter of the form
+*name (described in the next subsection) which receives a tuple containing the positional arguments beyond the formal parameter
+list. (*name must occur before **name.) For example, if we define a function like this:
+#+BEGIN_SRC python
+def cheeseshop(kind, *arguments, **keywords):
+    print "-- Do you have any", kind, "?"
+    print "-- I'm sorry, we're all out of", kind
+    for arg in arguments:
+        print arg
+    print "-" * 40
+    keys = sorted(keywords.keys())
+    for kw in keys:
+        print kw, ":", keywords[kw]
+
+cheeseshop("Limburger", "It's very runny, sir.",
+           "It's really very, VERY runny, sir.",
+           shopkeeper='Michael Palin',
+           client="John Cleese",
+           sketch="Cheese Shop Sketch")
+'''
+python test.py
+-- Do you have any Limburger ?
+-- I'm sorry, we're all out of Limburger
+It's very runny, sir.
+It's really very, VERY runny, sir.
+----------------------------------------
+client : John Cleese
+shopkeeper : Michael Palin
+sketch : Cheese Shop Sketch
+'''
+#+END_SRC
