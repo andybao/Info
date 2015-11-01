@@ -15,3 +15,15 @@
 - DESCRIBE /table_name/;
 - DROP TABLE /table_name/; 删除表
 - SELECT * FROM /table_name/ WHERE /column/ = '/value/';
+- DELETE FROM /table_name/ WHERE ...; 清空表数据
+- TRUNCATE TABLE /table_name/; 清空表数据
+** MySQL SELECT 更多的命令
+- SELECT last_name FROM email_list WHERE first_name = 'Bao';
+- SELECT first_name, last_name FROM email_list WHERE email = 'wenyu.bao@gmail.com';
+- SELECT * FROM email_list WHERE first_name = 'Andy' AND last_name = 'Bao';
+** PHP MySQL 语句
+- $dbc = mysqli_connect('/MySQL server address/', '/user/', '/pw/', '/DB/'); 连接数据库
+- $query = "SELECT * FROM /table_name/"; SQL语句
+- $result = mysqli_query('dbc', 'query'); 执行SQL语句，返回结果
+- $row = mysqli_fetch_array($result); 从结果中获取一个数据行，存储在数组中
+- mysqli_close($dbc); 断开数据库连接
