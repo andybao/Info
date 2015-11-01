@@ -6,3 +6,12 @@
 - php变量名以美元符号开头
 ** 关于$_POST
 - $_POST称为超级全局变量
+* 第三章 创建与填充数据库
+** MySQL 命令
+- CREATE DATABASE /database_name/;
+- USE /database_name/;
+- CREATE TABLE /table_name/ (/column_name1/ /column_type1/, ...);
+- INSERT INTO /table_name/ (/column_name1/, ...) VALUES ('/value1/', ...);
+- DESCRIBE /table_name/;
+- DROP TABLE /table_name/; 删除表
+- SELECT * FROM /table_name/ WHERE /column/ = '/value/';
