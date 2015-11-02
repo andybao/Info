@@ -9,6 +9,7 @@
 * 第三章 创建与填充数据库
 ** MySQL 命令
 - CREATE DATABASE /database_name/;
+- DROP DATABASE /database_name/;
 - USE /database_name/;
 - CREATE TABLE /table_name/ (/column_name1/ /column_type1/, ...);
 - INSERT INTO /table_name/ (/column_name1/, ...) VALUES ('/value1/', ...);
@@ -17,6 +18,11 @@
 - SELECT * FROM /table_name/ WHERE /column/ = '/value/';
 - DELETE FROM /table_name/ WHERE ...; 清空表数据
 - TRUNCATE TABLE /table_name/; 清空表数据
+- ALTER TABLE /table_name/ ADD /column_name/ /column_type/; 在表中增加一列
+*** ALTER TABLE email_list ADD id INT NOT NULL AUTO_INCREMENT FIRST, ADD PRIMARY KEY (id);
+- NOT NULL 当前列必须有值，不能为空
+- AUTO_INCREMENT 每插入新行，当前列值自增1
+- ADD PRIMARY KEY (id) id列为当前表的主键
 ** MySQL SELECT 更多的命令
 - SELECT last_name FROM email_list WHERE first_name = 'Bao';
 - SELECT first_name, last_name FROM email_list WHERE email = 'wenyu.bao@gmail.com';
@@ -27,3 +33,10 @@
 - $result = mysqli_query('dbc', 'query'); 执行SQL语句，返回结果
 - $row = mysqli_fetch_array($result); 从结果中获取一个数据行，存储在数组中
 - mysqli_close($dbc); 断开数据库连接
+* 第四章 现实的实际应用
+** PHP 函数
+- isset() 检查一个变量是否存在并已设置
+- empty() 查看一个变量是否包含内容
+** PHP 变量
+*** 超级全局变量
+- $_SERVER['PHP_SELF']
