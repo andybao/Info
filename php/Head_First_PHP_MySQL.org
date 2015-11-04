@@ -40,3 +40,11 @@
 ** PHP 变量
 *** 超级全局变量
 - $_SERVER['PHP_SELF']
+* 第五章 使用存储在文件中的数据
+** ALTER 修改数据库表
+*** ALTER TABLE /table_name/ /ACTION/ ...
+- pdf page 271
+- ADD COLUMN
+- DROP COLUMN
+- CHANGE COLUMN
+- MODIFY COLUMN

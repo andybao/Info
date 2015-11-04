@@ -1,0 +1,51 @@
+* 第一章 开始了解HTML
+** HTML标记
+***  <title> xxx </title>
+- 显示在浏览器上方
+***  <h1> xxx </h1>
+- 标题
+- <h1>到<h6> 字体从大到小
+***  <img src='xxx' >
+- 插入图像
+***  <p> xxx </p>
+- 段落
+***  <em> xxx </em>
+- 斜体
+*** <!-- xxx --->
+- 注释
+*** <style type="text/css"> xxx </style>
+- 网页的样式
+*** <a href="xxx.html"> xxx </a>
+- 超链接
+*** <q> xxx </q>
+- 简短的引用
+*** <blockquote> xxx </blockquote>
+- 大段文字引用
+*** <br>
+- 换行
+*** <li> xxx </li>
+- 创建列表
+*** <ol><li> xxx </li><ol>
+- 有序列表显示
+*** <ul><li> xxx </li><ul>
+- 无序列表显示
+*** <strong> xxx </strong>
+- 加粗
+*** <pre> xxx </pre>
+- 所见即所得
+*** <hr> xxx </hr>
+- 水平线
+** CSS(Cascading Style Sheet) 级联样式表标记
+*** background-color
+- 背景色
+*** margin-left/ margin-right
+- margin-left 20%;
+- 左右边界设置为没边占页面20％
+*** border
+- border: 1px dotted gray;
+- 主题周围边框线为点状且颜色为灰色
+*** font-family
+- font-family: sans-serif;
+- 文本使用的字体
+*** padding
+- 页面主体周围的填充
