@@ -15,8 +15,14 @@
 - 注释
 *** <style type="text/css"> xxx </style>
 - 网页的样式
-*** <a href="xxx.html"> xxx </a>
+*** <a>
+**** <a href="xxx.html"> xxx </a>
 - 超链接
+**** <a id="xxx"> ... </a>
+- <a href="xxx.html#..."> xxx </a>
+- 目标锚
+**** <a target="_blank" xxx> xxx </a>
+- 在新窗口打开链接
 *** <q> xxx </q>
 - 简短的引用
 *** <blockquote> xxx </blockquote>
