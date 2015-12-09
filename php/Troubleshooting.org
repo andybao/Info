@@ -1,0 +1,4 @@
+* httpd不能访问数据库
+- getsebool -a | grep httpd
+- CHECK VALUE: httpd_can_network_connect_db
+- setsebool -P httpd_can_network_connect_db 1
