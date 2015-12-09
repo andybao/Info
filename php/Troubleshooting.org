@@ -2,3 +2,6 @@
 - getsebool -a | grep httpd
 - CHECK VALUE: httpd_can_network_connect_db
 - setsebool -P httpd_can_network_connect_db 1
+* There is 1 other session using the database.
+- REVOKE CONNECT ON DATABASE TARGET_DB FROM public;
+- ELECT pg_terminate_backend(pg_stat_activity.pid) FROM pg_stat_activity WHERE pg_stat_activity.datname = 'TARGET_DB';
