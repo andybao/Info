@@ -1,0 +1,523 @@
+* 2. How to Retrieve Data from a Single Table
+** Date format
+- DD-MON-RRRR (01-MAY-2008)
+** 'AS' is an optional keyword:
+#+BEGIN_SRC
+invoice_total AS total
+invoice_total total
+#+END_SRC
+** '||' connects two values
+#+BEGIN_SRC
+verdor_city || ', ' || vendor_state AS address
+#+END_SRC
+** Scalar Functions
+*** SUBSTR
+- SUBSTR(/value/, /start position/, /length/)
+- Following example gets the fisrt letter from vendor_contact_first_name
+- BE CAREFUL: index start from 1 not 0
+#+BEGIN_SRC
+SUBSTR(vendor_contact_first_name, 1, 1)
+#+END_SRC
+*** TO_CHAR
+- Convert date to a string with format
+#+BEGIN_SRC
+TO_CHAR(payment_date, 'MM/DD/YYYY')
+#+END_SRC
+- Convert value to a string
+#+BEGIN_SRC
+TO_CHAR(payment_total)
+#+END_SRC
+*** SYSDATE
+- Get system date
+*** ROUND
+- Remove the decimal portion of the value
+**** TODO run this example
+#+BEGIN_SRC
+SELECT invoice_date, SYSDATE AS today
+ROUND(today - invoice_date) AS invoice_age
+RROM invoices;
+#+END_SRC
+*** MOD
+- Short of modulus
+- MOD(11, 10) = 1
+- MOD(15, 10) = 5
+** DUAL table
+- A empty testing table
+** DISTINCT
+- the value only appears once, all duplicate values are suppressed
+** ROWNUM
+*** Define how many rows will be displayed
+- Display 5 rows
+#+BEGIN_SRC
+SELECT * FROM invoices WHERE ROWNUM <= 5;
+#+END_SRC
+*** Pseudo Column ROWNUM
+- Result set is sorted after the WHERE clause
+- Sorts the five rows that are selected via the WHERE cause
+#+BEGIN_SRC
+SELECT *
+FROM invoices
+WHERE ROWNUM <= 5
+ORDER BY invoice_total;
+#+END_SRC
+- How to get the largest 5 invoice total
+#+BEGIN_SRC
+SELECT invoice_total
+FROM (SELECT * FROM invoices ORDER BY invoice_total DESC)
+WHERE ROWNUM <= 5;
+#+END_SRC
+** Comparison Operatiors
+*** Not Equal to
+<>, !=, ^=
+*** Vendors with names from A to L
+#+BEGIN_SRC
+WHERE vendor_name < 'M'
+#+END_SRC
+** [NOT]
+*** [NOT] IN
+#+BEGIN_SRC
+WHERE terms_id IN (1, 3, 4)
+WHERE vendor_state NOT IN ('CA', 'NV', 'OR')
+#+END_SRC
+*** [NOT] BETWEEN AND
+#+BEGIN_SRC
+WHERE invoice_date NOT
+BETWEEN '01-MAY-2008' AND '31-MAY-2008'
+#+END_SRC
+** LIKE
+- '%' match any string of 0 or more characters
+- '_' match any single character
+#+BEGIN_SRC
+WHERE vendor_city LIKE 'SAN%'
+//"San Diego", "Santa Ana", ...
+#+END_SRC
+** IS [NOT] NULL
+- SELECT /expression/ IS [NOT] NULL
+** ORDER BY
+*** NULL FIRST
+- The null values appear first
+#+BEGIN_SRC
+ORDER BY vendor_name NULLS FIRST
+#+END_SRC
+*** Multiple Columns
+- Sort first on state, then city and finally name
+#+BEGIN_SRC
+SELECT * FROM vendors ORDER BY vendor_state, vendor_state, vendor_name;
+#+END_SRC
+*** Alias can be used in ORDER BY
+#+BEGIN_SRC
+SELECT verdor_city || ', ' || vendor_state AS address
+FROM vendors
+ORDER BY address;
+#+END_SRC
+*** Column ordinals
+#+BEGIN_SRC
+SELECT vendor_id, vendor_name
+FROM vendors
+ORDER BY 2, 1;
+#+END_SRC
+* 3. How to Retrieve Data from Two Tables
+** The explicit syntax for an inner join
+SELECT /select_list/
+FROM /table_1/
+[INNER] JOIN /table_2/
+ON /join_condition_1/
+** The implicit syntax for an inner join
+SELECT /select_list/
+FROM /table_1/, /table_2/
+WHERE /table_1.column_name/ = /table_2.column_name/
+#+BEGIN_SRC
+SELECT invoice_number, vendor_name
+FROM vendors v, invoices i
+WHERE v.vendor_id = i.vendor_id;
+#+END_SRC
+** Self Joins
+SELECT /select_list/
+FROM /table/ t1 JOIN /table/ t2
+ON /t1.column_name/ = /t2.column_name/
+** Outer Joins
+It keeps unmatched rows from
+| Keyword | Table           |
+|---------+-----------------|
+| Left    | The left table  |
+| Right   | The right table |
+| Full    | Both tables     |
+** Implicit Outer Joins
+Left join: add market(+) on the right side
+#+BEGIN_SRC
+SELECT *
+FROM departments d, employees e
+WHERE d.number = e.number(+)
+#+END_SRC
+** Cross Joins or Cartesian Joins
+If you have m rows in the first table and n rows in the second table,
+the result table will yield m*n rows.
+* 4. How to Insert, Update and Delete Date and Coding Summary Queries
+** DML and TCL
+*** DML (Data Manipulation Language)
+- DML is the subcategory of SQL Commands for these manipulation commands
+or INSERT, UPDATE and DELETE.
+*** TCL (Transaction Control Language)
+- COMMIT, ROLLBACK
+** Creating a Table
+CREATE TABLE /table_name/ AS
+SELECT /select_list/
+FROM /table_source/
+WHERE /search_condition/
+GROUP BY /group_by_lit/
+HAVING /search_condition/
+ORDER BY /order_by_list/
+** DROP a Table
+DROP TABLE /table_name/
+** INSERT
+INSERT INTO /table_name/ /[(column_list)] VALUES (/expression_1/)
+** UPDATE
+UPDATE /table_name/
+SET /column_name_1/ = /expression_1/
+/[(WHERE search_condition)]/
+** DELETE
+DELETE [FROM] /table_name/
+/[WHERE search_condition]/
+** COMMIT and ROLLBACK
+** Aggregate(Group, Multiple-row) Functions
+AVG([ALL|DISTINCT] expression)
+SUM([ALL|DISTINCT] expression)
+MIN([ALL|DISTINCT] expression)
+MAX([ALL|DISTINCT] expression)
+COUNT([ALL|DISTINCT] expression)
+COUNT(*): NULLs are counted
+** GROUP BY and HAVING
+* 5. How to Create Tables
+** DDL (Data Definition Language)
+Commands that are used to create and modify database tables.
+** Table Creation Statement
+CREATE TABLE /tablename/
+(/columnname datatype/ [DEFAULT value]);
+#+BEGIN_SRC
+CREATE TABLE test_table
+(
+  test_id NUMBER NOT NULL UNIQUE,
+  test_date DATE DEFAULT SYSDATE
+)
+#+END_SRC
+** Check Constraints (e.g. table vendors)
+#+BEGIN_SRC
+SELECT constraint_name
+FROM user_constraints
+WHERE table_name = 'VENDORS';
+#+END_SRC
+* 6. How to Write PL/SQL Code
+** Data Types
+*** VARCHAR2
+- It holds variable-length string data
+- PL/SQL VARCHAR2 holds up to 32,767 characters
+- DB VARCHAR2 only holds 4,000 characters
+#+BEGIN_SRC
+StudentName VARCHAR2(30);
+#+END_SRC
+*** CHAR
+- It holds fixed-length character strings
+- PL/SQL CHAR holds up to 32,767 characters
+- Default size is 1
+#+BEGIN_SRC
+StudentGender CHAR;
+#+END_SRC
+*** NUMBER
+- NUMBER(<precision>, <scale>)
+#+BEGIN_SRC
+CurrentPrice NUMBER(5,2);
+#+END_SRC
+*** BINARY_INTEGER
+- It is used to represent integer values
+#+BEGIN_SRC
+CustID BINARY_INTEGER
+#+END_SRC
+*** DATE
+- It stores both date and time values
+#+BEGIN_SRC
+TodaysDate DATE;
+#+END_SRC
+*** BOOLEAN
+- TRUE or FALSE
+#+BEGIN_SRC
+OrderFlag BOOLEAN;
+#+END_SRC
+*** %TYPE
+- <variable name> <table name>.<field name>%TYPE
+#+BEGIN_SRC
+CustAddress customer.cadd%TYPE;
+#+END_SRC
+*** %ROWTYPE
+- <row varibale name> <table name>%ROWTYPE;
+#+BEGIN_SRC
+FacRow faculty%ROWTYPE;
+#+END_SRC
+** Program Blocks
+#+BEGIN_SRC
+DECLARE
+  <variable declarations>
+BEGIN
+  <body containing procedure or functions teps>
+EXCEPTION
+  <error-handling steps>
+END;
+/
+#+END_SRC
+** Comments
+#+BEGIN_SRC
+/* Some comments */
+-- two hyphens are comments too
+#+END_SRC
+** Arithmetic Statements
+| Operator | Meaning        | Example |     Result |
+|----------+----------------+---------+------------|
+| '**'     | Exponentiation | 2 ** 3  |          8 |
+| '*'      | Multiplication | 2 * 3   |          6 |
+| '/'      | Division       | 9 / 2   |        4.5 |
+| '+'      | Addition       | 3 + 2   |          5 |
+| -        | Subtraction    | 3 - 2   |          1 |
+| -        | Negation       | -5      | Negative 5 |
+** Assignment operator
+:=
+#+BEGIN_SRC
+vendor_id_var NUMBER := 95;
+#+END_SRC
+** Output
+DBMS_OUTPUT.PUT(string) - output without a line break
+DBMS_OUTPUT.PUT_LINE(string) - followed by a line break
+#+BEGIN_SRC
+SET SERVEROUTPUT ON
+DBMS_OUTPUT.PUT_LINE('Hello World');
+#+END_SRC
+** Controlling Statements
+IF...ELSIF...ELSE
+CASE...WHEN...ELSE
+FOR...IN...LOOP
+WHILE...LOOP
+LOOP...EXIT WHEN
+CURSOR...IS
+EXECUTE IMMEDIAGE
+** Set a Variable to a Selected Value
+SELECT /column_1/ INTO /variable_1/
+#+BEGIN_SRC
+DECLARE
+  max_invoice_total invoices.invoice_total%TYPE;
+BEGIN
+  SELECT MAX(invoice_total) INTO max_invoice_total;
+#+END_SRC
+** IF Statement
+IF <boolean_expression> THEN
+  <statement>;
+[ELSIF <boolean_expression> THEN
+  <statement>;]
+[ELSE
+  <statement>;]
+END IF;
+#+BEGIN_SRC
+SET SERVEROUTPUT ON;
+
+DECLARE
+  first_invoice_due_date DATE;
+
+BEGIN
+  SELECT MIN(invoice_due_date)
+  INTO first_invoice_due_date
+  FROM invoices
+  WHERE invoice_total - payment_total - credit_total > 0;
+
+  IF first_invoice_due_date < SYSDATE() THEN
+    DBMS_OUTPUT.PUT_LINE ('Outstanding invoices overdue.');
+  ELSIF first_invoice_due_date = SYSDATE() THEN
+    DBMS_OUTPUT.PUT_LINE ('Outstatnding invoices are due today');
+  ELSE
+    DBMS_OUTPUT.PUT_LINE ('No invocies are overdue.');
+  ELSIF;
+END;
+/
+#+END_SRC
+** CASE Statement
+CASE <expression>
+  WHEN <expression_value> THEN <statement>;
+  [WHEN <expression_value> THEN <statement>;]
+  [ELSE <statement>;]
+END CASE;
+** LOOP Structures
+*** LOOP ... EXIT
+#+BEGIN_SRC
+loopCount := 0;
+LOOP
+  loopCount := loopCount + 1;
+  IF loopCount = 6 THEN
+    EXIT;
+  END IF;
+  DBMS_OUTPUT.OUT_LINE (loopCount);
+END LOOP;
+#+END_SRC
+*** LOOP ... EXIT WHEN
+#+BEGIN_SRC
+loopCount := 0;
+LOOP
+  loopCount := loopCount + 1;
+  DBMS_OUTPUT.OUT_LINE (loopCount);
+  EXIT WHEN loopCount = 5;
+END LOOP;
+#+END_SRC
+*** WHILE ... LOOP
+#+BEGIN_SRC
+loopCount := 0;
+WHILE loopCount < 5
+LOOP
+  loopCount := loopCount + 1;
+  DBMS_OUTPUT.OUT_LINE (loopCount);
+END LOOP;
+#+END_SRC
+*** The Numeric FOR LOOP
+#+BEGIN_SRC
+FOR loopCount IN 1..5
+LOOP
+  INSERT INTO count_table VALUES(loopCount);
+END LOOP;
+#+END_SRC
+
+** Cursor
+- Cursor contains columens from table(s).
+- CURSOR <cursor_name> IS <select_statement>;
+#+BEGIN_SRC
+SET SERVEROUTPUT ON;
+
+DECLARE
+  CURSOR invoices_cursor IS
+    SELECT invoice_id, invoice_total
+    FROM invoices
+    WHERE invoice_total - payment_total - credit_total > 0;
+
+  invoice_row invoices%ROWTYPE;
+
+BEGIN
+  FOR invoice_row IN invoices_cursor LOOP
+    <do something>
+  END LOOP;
+END;
+/
+#+END_SRC
+*** Implicit Cursor
+- Assign the output of a SELECT query to a PL/SQL variable
+- The query must return one and only one record
+SELECT <date field(s)>
+INTO <declared variable name(s)>
+FROM <table name(s)>
+WHERE <search condition that will return a single record>;
+#+BEGIN_SRC
+SET SERVEROUTPUT ON;
+
+DECLARE
+  lastName VARCHAR2(30);
+  firstName VARCHAR2(30);
+
+BEGIN
+  SELECT f_last, f_first
+  INTO lastName, firstName
+  FROM faculty
+  WHERE f_id = 1;
+
+  DBMS_OUTPUT.PUT_LINE('The faculty member''s name is' || firstName || ' ' || lastName);
+END;
+/
+#+END_SRC
+*** Explicit Cursor
+- Declare the cursor
+- Open the cursor
+- Fetch the cursor results into PL/SQL variables
+- Close the cursor
+**** Declare
+#+BEGIN_SRC
+DECLARE
+  currentCode VARCHAR2(5);
+  CURSOR locationCursor IS
+  SELECT locid, room, capacity
+  FROM location
+  WHERE code = currentCode;
+#+END_SRC
+**** OPEN
+#+BEGIN_SRC
+OPEN locationCursor;
+#+END_SRC
+**** FETCH
+- FETCH command retrieves the query data from the db into the active set one row at a time
+- FETCH <cursor_name> INTO <variable(s)>;
+**** ClOSE
+- CLOSE <cursor name>
+**** Example_1
+BEGIN
+  OPEN <cursor name>
+  LOOP
+    FETCH <cursor name> INTO <variables>;
+    <do something>
+  END LOOP;
+  CLOSE <cursor name>;
+END;
+**** Example_2
+BEGIN
+  FOR <cursor variables> IN <cursor name> LOOP
+    <do something>
+  END LOOP;
+END;
+* 7. Bind Variables and Substitution Variables
+#+BEGIN_SRC
+VARIABLE invoice_id_value NUMBER;
+
+BEGIN
+  :invoice_id_value := &invoice_id;
+END;
+/
+#+END_SRC
+* 8. How to Create Stored Procedures and Functions
+** CREATE PROCEDURE
+CREATE [OR REPLACE] PROCEDURE procedure_name
+[(parameter_name data_type)]
+{IS|AS}
+pl_sql_block
+#+BEGIN_SRC
+CREATE OR REPLACE PROCEDURE update_invoices_credit_total
+(
+  invoice_number_param VARCHAR2,
+  credit_total_param NUMBER
+)
+AS
+BEGIN
+  UPDATE invoices
+  SET credit_total = credit_total_param
+  WHERE invoice_number = invoice_number_param;
+
+  COMMIT;
+EXCEPTION
+  WHEN OTHERS THEN
+    ROLLBACK;
+END;
+/
+#+END_SRC
+** CALL a Stored Procedure
+#+BEGIN_SRC
+CALL update_invoices_credit_total('367447', 300);
+#+END_SRC
+** PL/SQL
+#+BEGIN_SRC
+BEGIN
+  update_invoices_credit_total('367447', 300);
+END;
+/
+#+END_SRC
+** Pass Parameters by Name
+- '=>'
+#+BEGIN_SRC
+BEGIN
+  update_invoices_credit_total (credit_total_param => 300, invoice_number_param => '367447');
+
+#+END_SRC
+** Input and Output Parameters
+- IN, OUT, IN/OUT
+** Optional Parameter
+- parameter_name data_type [DEFAULT default_value]
+** Raise Errors
+- VALUE_ERROR
+- RAISE_APPLICATION_ERROR(-20001, 'error description')

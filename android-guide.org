@@ -1,0 +1,179 @@
+* 3 The Activity Lifecycle
+** Saving Data Across Rotation
+#+BEGIN_SRC java
+@Override
+public void onSaveInstanceState(Bundle savedInstanceState) {
+    super.onSaveInstanceState(savedInstancestate);
+    savedinstancestate.putInt(KEY_INDEX, mCurrentIndex);
+}
+
+@Override
+public void onCreate(Bundle savedInstancestate) {
+    super.onCreate(savedInstancestate);
+    if (savedinstancestate != null) {
+        mCurrentindex = savedinstancestate.getInt(KEY_INDEX, 0);
+    }
+}
+#+END_SRC
+
+* 5 Your Second Activity
+** Passing Data Between Activities
+*** Activity A -> B
+#+BEGIN_SRC java
+public class Activity_B extends AppCompatActivity {
+    private static final String KEY = "key";
+
+    // Activity A call this method to put value
+    public static Intent newIntent(Context c, boolean value) {
+    Intent i = new Intent(c, Activity_B.class);
+    i.putExtra(KEY, value);
+    return i;
+    }
+
+    private getTheValue() {
+    // Activity B get the value
+    mvalue = getintent().getbooleanextra(KEY, false);
+    }
+}
+#+END_SRC
+*** Activity B -> A
+#+BEGIN_SRC java
+public class Activity_A extends AppCompatActivity {
+
+    private static final REQUEST_CODE = "request_code";
+
+    private void startActivityB() {
+        Intent i = new Intent(Activity_A.this, Activity_B.class);
+        startActivityForResult(i, REQUEST_CODE);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (resultCode != Activity.RESULT_OK) {
+            return;
+        }
+        if (requestCode == REQUEST_CODE) {
+
+            if (data == null) {return;}
+            mdata = Activity_B.getResult(data);
+        }
+    }
+}
+
+public class Activity_B extends AppCompatActivity {
+    private static final KEY = "key";
+
+    public static boolean getResult(Intent result) {
+        return result.getBooleanExtra(KEY, false);
+    }
+
+    private void setData(boolean value) {
+        Intent data = new Intent();
+        data.putExtra(KEY, value);
+        setResult(RESULT_OK, data);
+        //setResult(RESULT_OK);
+    }
+}
+#+END_SRC
+* 14 SQLite Databases
+** How to create DB
+*** DBSchema/DBPersistenceContract
+#+BEGIN_SRC java
+public class DBSchema {
+
+    public class DBTable {
+        public static final String NAME = "crimes";
+
+        public class Cols {
+            public static final String ID = "id";
+            public static final String TITLE = "title";
+            public static final String SUSPECT = "suspect";
+            public static final String DATE = "date";
+            public static final String SOLVED = "solved";
+        }
+    }
+}
+#+END_SRC
+
+*** DBHelper
+#+BEGIN_SRC java
+public class DBOpenHelper extends SQLiteOpenHelper {
+
+    private static final String DB_NAME = "crimes.db";
+    private static final int VERSION = 1;
+
+    public DBOpenHelper(Context context) {
+        super(context, DB_NAME, null, VERSION);
+    }
+
+    @Override
+    public void onCreate(SQLiteDatabase sqLiteDatabase) {
+        sqLiteDatabase.execSQL("create table " + DBTable.NAME + "(" +
+                "_id integer primary key autoincrement, " +
+                DBTable.Cols.ID + ", " +
+                DBTable.Cols.TITLE + ", " +
+                DBTable.Cols.DATE + ", " +
+                DBTable.Cols.SUSPECT + ", " +
+                DBTable.Cols.SOLVED + ")"
+        );
+    }
+
+    @Override
+    public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
+
+    }
+}
+#+END_SRC
+*** Get a DB in code
+#+BEGIN_SRC java
+mDB = new DBHelper(mContext).getWritableDatabase();
+#+END_SRC
+** Writing to the DB
+*** ContentValues
+#+BEGIN_SRC java
+    private ContentValues getContentValues(Crime crime) {
+
+        ContentValues values = new ContentValues();
+
+        values.put(DBTable.Cols.DATE, crime.getDate().getTime());
+        values.put(DBTable.Cols.ID, crime.getId().toString());
+        values.put(DBTable.Cols.TITLE, crime.getTitle());
+        values.put(DBTable.Cols.SUSPECT, crime.getSuspect());
+        values.put(DBTable.Cols.SOLVED, crime.isSolved() ? 1 : 0);
+
+        return values;
+    }
+#+END_SRC
+*** Inserting a new row
+#+BEGIN_SRC java
+    public void addCrime(Crime crime) {
+        ContentValues values = getContentValues(crime);
+        mDatabase.insert(DBTable.NAME, null, values);
+    }
+#+END_SRC
+*** updating a row
+#+BEGIN_SRC java
+    public void updateCrime(Crime crime) {
+        ContentValues values = getContentValues(crime);
+        mDatabase.update(DBTable.NAME, values,
+                DBTable.Cols.ID + " = ?",
+                new String[] {crime.getId().toString()});
+    }
+#+END_SRC
+** Reading from the DB
+*** Get cursor form db.query
+#+BEGIN_SRC java
+Cursor query = mDatabase.query(
+                DBTable.NAME,
+                null,
+                whereClause,
+                whereArgs,
+                null,
+                null,
+                null
+                );
+#+END_SRC
+*** Get data from cursor
+#+BEGIN_SRC java
+String title = cursor.getString(cursor.getColumnIndex(CrimeTable.Cols.TITLE));
+#+END_SRC

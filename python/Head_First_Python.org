@@ -1,0 +1,8 @@
+* 初识Python
+** isinstance()
+#+BEGIN_SRC python
+
+movies =['The Holy Grail', 1975, 'Terry Jones & Terry Gilliam', 91,
+         ['Graham Chapman', ['Michael Palin', 'John Cleese', 'TerGilliam']]]
+
+#+END_SRC
